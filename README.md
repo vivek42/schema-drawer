@@ -9,7 +9,7 @@ This project will be developed using agile methodology. The project will be divi
 
 # Tasks
 As mentioned above this project will be developed in stages or tasks. This project is divided into 5 tasks.
-These tasks are defined as under -
+These tasks are:
 
 1. Create basic web application using Spring MVC.
 2. Create build scripts to build, deploy, and to perform testing.
