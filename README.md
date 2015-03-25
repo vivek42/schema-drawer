@@ -14,7 +14,7 @@ These tasks are:
 #1. Create basic web application using Spring MVC.
   Under this task a simple web application will be implemented which should be able to consume a SQLite database file from     the user. This task is further divided into subtasks - 
 
-  a. Setup eclipse, install Spring tool kit in the eclipse
+  a. Setup eclipse, install Spring tool kit in the eclipse, setup git as version control
 
   b. Install MySql/SQLite
 
