@@ -1,17 +1,17 @@
-#schema-drawer
+# Schema Drawer
 Draw schema diagrams from a SQLite database
 
-# Abstract
+## Abstract
 The goal of this project is to create a web application which takes an uploaded a SQLite database file, and creates schema diagrams based on it. The application should offer these diagrams in different formats and should allow profile creation and maintainance to the users.
 
-# Development
+## Development
 This project will be developed using agile methodology. The project will be divided into tasks/ goals, each task will have description, estimate, measurement of completion. The estimate will be given by number of iterations, and for this project 1 iteration is 2 weeks.
 
-# Tasks
+## Tasks
 As mentioned above this project will be developed in stages or tasks. This project is divided into 5 tasks.
 These tasks are:
 
-#1. Create basic web application using Spring MVC.
+### 1. Create basic web application using Spring MVC.
   Under this task a simple web application will be implemented which should be able to consume a SQLite database file from     the user. This task is further divided into subtasks - 
 
   a. Setup eclipse, install Spring tool kit in the eclipse, setup git as version control
@@ -32,7 +32,7 @@ These tasks are:
 
   i. Design/Refactor the layout of UI to make it look good.
 
-#2. Create build scripts to build, deploy, and to perform testing.
+### 2. Create build scripts to build, deploy, and to perform testing.
 
   Under this task the web application created above will be deployed and tested with build scripts. This task is further       divided into subtasks -
 
@@ -50,8 +50,8 @@ These tasks are:
 
   g. Write command line script to perform selenium testing which reports unexpected behaviour and exception events
 
-#3. Research algorithms to draw schema.
+### 3. Research SchemaCrawler to draw schema.
 
-#4. Implement the functionality to upload files, and draw diagrams in the web application.
+### 4. Implement the functionality to upload files, and draw diagrams in the web application.
 
-#5. Implement profile creation for users. 
+### 5. Implement profile creation for users. 
