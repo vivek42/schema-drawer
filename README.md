@@ -12,43 +12,29 @@ As mentioned above this project will be developed in stages or tasks. This proje
 These tasks are:
 
 ### 1. Create basic web application using Spring MVC.
-  Under this task a simple web application will be implemented which should be able to consume a SQLite database file from     the user. This task is further divided into subtasks - 
+Under this task a simple web application will be implemented which should be able to consume a SQLite database file from     the user. This task is further divided into subtasks
 
-  a. Setup eclipse, install Spring tool kit in the eclipse, setup git as version control
-
-  b. Install MySql/SQLite
-
-  c. Write a basic hello world web application using spring MVC.
-
+  a. Setup Eclipse, install Spring tool kit in the eclipse, setup git as version control
+  b. Install MySql/ SQLite
+  c. Write a basic hello world web application using Spring MVC.
   d. Add functionality of reading the data from text box from the home page and storing it in database.
-
   e. Generate Exception events and store them in database for debugging.
-
   f. Add file browser widget in the home page and store file content in the database.  
-
-  g. Display stored files in form of a clickable list in a seperate page.
-
+  g. Display stored files in form of a clickable list in a separate page.
   h. Display content of the file when the link on the file name is clicked.
-
-  i. Design/Refactor the layout of UI to make it look good.
+  i. Design the layout of UI to make it look good.
 
 ### 2. Create build scripts to build, deploy, and to perform testing.
+Under this task the web application created above will be deployed and tested with build scripts. This task is further divided into subtasks -
 
-  Under this task the web application created above will be deployed and tested with build scripts. This task is further       divided into subtasks -
-
-  a. Install clover or similar software to check for code coverage.
-
+  a. Install Clover or similar software to check for code coverage.
   b. Perform unit testing for every source file written so far.
-
-  c. Write script to deploy this project from source.
-
-  d. Write selenium script to check the content upload from text box.
-
-  e. Write selenium script to check the content upload from file.
-
-  f. Write command line script to perform unit testing over the project which reports success/errors and also the time            elapsed and code coverage.
-
-  g. Write command line script to perform selenium testing which reports unexpected behaviour and exception events
+  c. Learn how to use Selenium, by writing a very basic test.
+  d. Write script to build and deploy this project from source.
+  e. Write Selenium script to check the content upload from text box.
+  f. Write Selenium script to check the content upload from file.
+  g. Write command line script to perform unit testing over the project which reports success/errors and also the time elapsed and code coverage.
+  g. Write command line script to perform Selenium testing which reports unexpected behavior and exception events.
 
 ### 3. Research SchemaCrawler to draw schema.
 
