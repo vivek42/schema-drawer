@@ -37,6 +37,9 @@ Under this task the web application created above will be deployed and tested wi
   g. Write command line script to perform Selenium testing which reports unexpected behavior and exception events.
 
 ### 3. Research SchemaCrawler to draw schema.
+  a. Read about SchemaCrawler
+  b. Make a list of features needed from SchemaCrawler for the project
+  c. Proof of concept and validate if each feature is available
 
 ### 4. Implement the functionality to upload files, and draw diagrams in the web application.
 
