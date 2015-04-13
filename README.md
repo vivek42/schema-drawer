@@ -42,5 +42,15 @@ Under this task the web application created above will be deployed and tested wi
   c. Proof of concept and validate if each feature is available
 
 ### 4. Implement the functionality to upload files, and draw diagrams in the web application.
+  a. Design Data model which will be used to draw the images from the database.
+  b. Integrate SchemaCrawler into the project. Perform unit testing as part of it.
+  c. Use SchemaCrawler to read the contents of the uploaded file
+  d. Store the results in the database.
+  e. Design how the image of the schema should look like (color of the nodes, fonts of the text present etc.)
+  e. Draw images from the database. 
 
 ### 5. Implement profile creation for users. 
+  a. Extend the Data design to accomodate user profiles
+  b. Draw layout for the Registration page
+  b. Add/Implement registration page to the web application
+  c. Design layout for user profiles
