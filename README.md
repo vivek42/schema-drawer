@@ -34,7 +34,7 @@ Under this task a simple web application will be implemented which should be abl
   
   j. Design the layout of UI to make it look good. - 0.5 week 
   
-  ### Measurement 
+#### Measurement 
   This task will be measured in terms of demo of the project given. The demo of the this project should have all functionalities covered by the subtasks. Estimate of task totals out to be 8 weeks.
 
 ### 2. Create build scripts to build, deploy, and to perform testing.
@@ -56,7 +56,7 @@ Under this task the web application created above will be deployed and tested wi
   
   h. Write command line script to perform Selenium testing which reports unexpected behavior and exception events. - 1 week
   
-  ### Measurement 
+#### Measurement 
   This task will be measured in terms of code and documentation submitted. The documentation should contain step by step process of deployment and testing of the project. Deployed at remote location from scratch this project should be able to perform/display all sorts of testing covered in the subtasks. Estimate of the tasks totals out to be 8 weeks
 
 ### 3. Research SchemaCrawler to draw schema.
@@ -66,7 +66,7 @@ Under this task the web application created above will be deployed and tested wi
   
   c. Proof of concept and validate if each feature is available - 2 weeks
   
-  ### Measurement
+### Measurement
   This task will be measured in terms of documentation. This documentation should contain a report which includes the proof of concept for applicability of SchemaCrawler in the project. It must contain every feature we require/achieve from SchemaCrawler as well as feature we need to develope separately. Estimate of the task is coming out to be 4 weeks.
 
 ### 4. Implement the functionality to upload files, and draw diagrams in the web application.
@@ -84,7 +84,7 @@ Under this task the web application created above will be deployed and tested wi
   
   g. Using database draw images with help of research done. - 2 weeks
   
-  ### Measurement 
+#### Measurement 
   This task will be measured in terms of demo of the project given. The demo of the this project should have all functionalities covered by the subtasks. The demo for this subtask can be a selenium test. Estimate of task totals out to be 7 weeks.
 
 ### 5. Implement profile creation for users. 
@@ -100,7 +100,7 @@ Under this task the web application created above will be deployed and tested wi
   
   f. Add support for different extensions for images drawn. - 2 weeks
   
-    ### Measurement 
+#### Measurement 
   This task will be measured in terms of demo of the project given. The demo of the this project should have all functionalities covered by the subtasks. The demo for this subtask can be a selenium test. Estimate of task totals out to be 7 weeks.
   
   
