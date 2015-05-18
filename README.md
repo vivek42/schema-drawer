@@ -16,10 +16,13 @@ These tasks are:
 Under this task a simple web application will be implemented which should be able to consume a SQLite database file from the user. 
 
   a. Setup Eclipse, install Spring Tool Kit in the Eclipse, setup git as version control - 1 week
+     Completed.
   
   b. Install MySql/ SQLite - 1 week
+     Completed.
   
   c. Write a basic hello world web application using Spring MVC - a single page, with a controller - 1 week
+     In progress.
   
   d. Add functionality of reading the data from text box from the home page and storing it in database - 1 week
   
