@@ -22,82 +22,82 @@ Under this task a simple web application will be implemented which should be abl
      Completed.
   
   c. Write a basic hello world web application using Spring MVC - a single page, with a controller - 1 week
-     In progress.
+     Completed. Due Date - May 25 
   
-  d. Add functionality of reading the data from text box from the home page and storing it in database - 1 week
+  d. Add functionality of reading the data from text box from the home page and storing it in database - 1 week In progress . Due Date - June 1
   
-  e. Create an event service, and store exception events in database for debugging - 1 week
+  e. Create an event service, and store exception events in database for debugging - 1 week . Due Date June 8
   
-  f. Add file browser widget to the home page and store file content in the database - 1 week 
+  f. Add file browser widget to the home page and store file content in the database - 1 week . Due Date June 15
   
-  g. Display history of uploaded files on a separate page - 1 week
+  g. Display history of uploaded files on a separate page - 1 week . Due Date June 22
   
-  h. Design the layout of UI to make it look good - 1 week 
+  h. Design the layout of UI to make it look good - 1 week . Due Date June 29
   
 #### Measurement 
-This task will be measured in terms of demo of the project given. The demo of the this project should have all functionalities covered by the subtasks. Successful completion will involve having another engineer review and approve the demo. Estimate of task totals out to be 8 weeks.
+This task will be measured in terms of demo of the project given. The demo of the this project should have all functionalities covered by the subtasks. Successful completion will involve having another engineer review and approve the demo. Estimate of task totals out to be 8 weeks. Due Date June 29
 
 ### 2. Create build scripts to build, deploy, and to perform testing
 
 Under this task the web application created above will be deployed and tested with build scripts. 
 
-  a. Write Gradle to build and deploy this project from source - 2 weeks
+  a. Write Gradle to build and deploy this project from source - 2 weeks . Due Date July 13
   
-  b. Install Clover or similar software to check for code coverage - 1 week
+  b. Install Clover or similar software to check for code coverage - 1 week . Due Date July 20
   
-  c. Perform unit testing for every source file written so far - 1 week
+  c. Perform unit testing for every source file written so far - 1 week . Due Date July 27
   
-  d. Learn how to use Selenium, by writing a very basic test - 2 weeks
+  d. Learn how to use Selenium, by writing a very basic test - 2 weeks. Due Date Aug 10
   
-  e. Write Selenium script to check the content upload from text box - 1 week
+  e. Write Selenium script to check the content upload from text box - 1 week . Due Date Aug 17
   
-  g. Make sure the Gradle build performs unit testing (including Selenium testing) over the project which reports success/ errors and also the time elapsed and code coverage - 3 weeks
+  g. Make sure the Gradle build performs unit testing (including Selenium testing) over the project which reports success/ errors and also the time elapsed and code coverage - 3 weeks. Due Date Sept 7
   
 #### Measurement 
-This task will be measured in terms of code and documentation submitted. The documentation should contain step by step process of deployment and testing of the project. Deployed at remote location from scratch this project should be able to perform/ display all sorts of testing covered in the subtasks. Successful completion will involve having another engineer read the documentation, and build and deploy the project. Estimate of the tasks totals out to be 10 weeks.
+This task will be measured in terms of code and documentation submitted. The documentation should contain step by step process of deployment and testing of the project. Deployed at remote location from scratch this project should be able to perform/ display all sorts of testing covered in the subtasks. Successful completion will involve having another engineer read the documentation, and build and deploy the project. Estimate of the tasks totals out to be 10 weeks. Due Date Sept 7
 
 ### 3. Research SchemaCrawler to draw schema
 
-  a. Read about SchemaCrawler - 1 week
+  a. Read about SchemaCrawler - 1 week. Due Date Sept 14
   
-  b. Make a list of features needed from SchemaCrawler for the project - 1 week
+  b. Make a list of features needed from SchemaCrawler for the project - 1 week. Due Date Sept 21
   
-  c. Proof of concept and validate if each feature is available - 2 weeks
+  c. Proof of concept and validate if each feature is available - 2 weeks. Due Date Oct 5
   
 ### Measurement
-This task will be measured in terms of documentation. This documentation should contain a report which includes the proof of concept for applicability of SchemaCrawler in the project. It must contain every feature we require/achieve from SchemaCrawler as well as feature we need to develop separately. Estimate of the task is coming out to be 4 weeks.
+This task will be measured in terms of documentation. This documentation should contain a report which includes the proof of concept for applicability of SchemaCrawler in the project. It must contain every feature we require/achieve from SchemaCrawler as well as feature we need to develop separately. Estimate of the task is coming out to be 4 weeks. Due Date Oct 5
 
 ### 4. Implement the functionality to upload files, and draw diagrams in the web application
 
-  a. Design data model which will be used to draw the images from the database - 1 week
+  a. Design data model which will be used to draw the images from the database - 1 week Due Date Oct 12
   
-  b. Integrate SchemaCrawler into the project - 1 week
+  b. Integrate SchemaCrawler into the project - 1 week Due Date Oct 19
   
-  c. Store the diagram in the database - 1 week
+  c. Store the diagram in the database - 1 week Due Date Oct 26
   
-  d. Design how the image of the schema should look like (color of the nodes, fonts of the text present etc.) - 1 week
+  d. Design how the image of the schema should look like (color of the nodes, fonts of the text present etc.) - 1 week Due Date Nov 2
   
-  e. Research on best way to draw the images, as part of back end or through javascripts in front end itself - 1 week
+  e. Research on best way to draw the images, as part of back end or through javascripts in front end itself - 1 week Due Date Nov 9
   
-  f. Create a new web page to allow users to upload a SQLite file, and view the diagram - 2 weeks
+  f. Create a new web page to allow users to upload a SQLite file, and view the diagram - 2 weeks Due Date Nov 23
   
-  g. Deploy to "production", that is, a free hosting site that allows you to run a Java web application - 3 weeks
+  g. Deploy to "production", that is, a free hosting site that allows you to run a Java web application - 3 weeks Due Date Dec 14
   
 #### Measurement 
 This task will be measured in terms of demo of the project given. The demo of the this project should have all functionalities covered by the subtasks. The demo for this subtask can be a Selenium test. Successful completion will involve having another engineer use the live product. Estimate of task totals out to be 10 weeks.
 
 ### 5. Implement profile creation for users. 
-  a. Extend the Data design to accomodate user profiles - 1 week
+  a. Extend the Data design to accomodate user profiles - 1 week Due Date Dec 21
   
-  b. Draw layout for the Registration page - 1 week
+  b. Draw layout for the Registration page - 1 week Due Date Dec 28
   
-  c. Add/Implement registration page to the web application - 1 week
+  c. Add/Implement registration page to the web application - 1 week Due Date Jan 4
   
-  d. Design layout for user profiles - 1 week
+  d. Design layout for user profiles - 1 week Due Date Jan 11
   
-  e. Add/Implement user profile page - 1 week
+  e. Add/Implement user profile page - 1 week Due Date Jan 18
   
-  f. Add support for different extensions for images drawn. - 2 weeks
+  f. Add support for different extensions for images drawn. - 2 weeks Due Date Feb 1 
   
 #### Measurement 
   This task will be measured in terms of demo of the project given. The demo of the this project should have all functionalities covered by the subtasks. The demo for this subtask can be a selenium test. Estimate of task totals out to be 7 weeks.
