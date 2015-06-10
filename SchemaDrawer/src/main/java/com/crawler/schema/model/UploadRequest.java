@@ -4,13 +4,13 @@ import java.util.Date;
 
 public class UploadRequest {
 	
-	int uploadId;
+	Long uploadId;
 	String uploadContent;
 	Date uploadTime;
-	public int getUploadId() {
+	public Long getUploadId() {
 		return uploadId;
 	}
-	public void setUploadId(int uploadId) {
+	public void setUploadId(Long uploadId) {
 		this.uploadId = uploadId;
 	}
 	public String getUploadContent() {
