@@ -35,9 +35,9 @@ public class AppConfig {
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/schema-drawer");
-        dataSource.setUsername("root");
-        dataSource.setPassword("root");
+        dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/schema_drawer");
+        dataSource.setUsername("vivek");
+        dataSource.setPassword("P@ssword");
          
         return dataSource;
     }
