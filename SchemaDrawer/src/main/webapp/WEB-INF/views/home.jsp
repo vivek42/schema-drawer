@@ -16,7 +16,10 @@
 	<form:form id="uploadRequestForm" action="/schema/upload" commandName="uploadRequest" method="post">
 			<table>
 				<tr>
-					<td>Upload Your Data :</td>
+					<td>Enter desired fileName :</td>
+					<td><form:input path="fileName" />
+					</td>
+					<td><form:errors path="fileName" cssClass="error" />
 					<td><form:input path="uploadContent" />
 					</td>
 					<td><form:errors path="uploadContent" cssClass="error" />

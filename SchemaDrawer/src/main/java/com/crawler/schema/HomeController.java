@@ -55,14 +55,6 @@ public class HomeController {
 		return "home";
 	}
 	
-//	@RequestMapping(value = "/upload", method = RequestMethod.GET)
-//	public ModelAndView renderUploadPage(Locale locale, Model model){
-//		ModelAndView mav = new ModelAndView("upload");
-//		UploadRequest uploadRequest = new UploadRequest();
-//		((Model) mav).addAttribute("uploadRequest", uploadRequest);
-//		return mav;
-//	}
-	
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public ModelAndView submitUploadContent(@ModelAttribute UploadRequest uploadRequest, HttpServletRequest request){
 		String message;

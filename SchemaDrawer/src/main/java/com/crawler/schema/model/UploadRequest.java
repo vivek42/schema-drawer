@@ -7,11 +7,18 @@ public class UploadRequest {
 	Long uploadId;
 	String uploadContent;
 	Date uploadTime;
+	String fileName;
 	public Long getUploadId() {
 		return uploadId;
 	}
 	public void setUploadId(Long uploadId) {
 		this.uploadId = uploadId;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 	public String getUploadContent() {
 		return uploadContent;

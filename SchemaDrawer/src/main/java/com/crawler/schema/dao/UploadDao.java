@@ -1,21 +1,31 @@
 package com.crawler.schema.dao;
 
-import org.springframework.stereotype.Repository;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.crawler.schema.model.UploadRequest;
 
-@Repository
 public class UploadDao {
 	
-//    private JdbcTemplate jdbcTemplate;
+	public static final String INSERT_UPLOAD = "insert into uploads (upload_id, content, upload_time)"
+														  + "values (?,?,?)";
+	
+    private JdbcTemplate jdbcTemplate;
 
-//    @Autowired
-//    public void setDataSource(DataSource dataSource) {
-////        this.jdbcTemplate = new JdbcTemplate(dataSource);
-//    }
+    @Autowired
+    public UploadDao(DataSource dataSource) {
+        jdbcTemplate = new JdbcTemplate(dataSource);
+    }
 
 	public void upload(UploadRequest uploadRequest) {
-		// TODO Auto-generated method stub
+		try{
+			jdbcTemplate.update(INSERT_UPLOAD, 
+					uploadRequest.getUploadId().intValue(), uploadRequest.getUploadContent(), uploadRequest.getUploadTime());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 }
