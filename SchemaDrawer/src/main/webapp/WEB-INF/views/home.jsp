@@ -13,16 +13,16 @@
 <P>  The time on the server is ${serverTime}. </P>
 
 <h2>Upload Box</h2>
-	<form:form id="uploadRequestForm" action="/schema/upload" commandName="uploadRequest" method="post">
+	<form:form id="uploadRequestForm" action="/schema/upload" commandName="uploadRequest" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td>Enter desired fileName :</td>
 					<td><form:input path="fileName" />
 					</td>
 					<td><form:errors path="fileName" cssClass="error" />
-					<td><form:input path="uploadContent" />
+					<td><form:input type="file" path="uploadContentFile" />
 					</td>
-					<td><form:errors path="uploadContent" cssClass="error" />
+					<td><form:errors path="uploadContentFile" cssClass="error" />
 					</td>
 				</tr>
 				<tr>

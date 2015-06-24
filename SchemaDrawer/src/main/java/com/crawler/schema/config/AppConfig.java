@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.crawler.schema.dao.EventDao;
 import com.crawler.schema.dao.UploadDao;
@@ -41,6 +42,13 @@ public class AppConfig {
          
         return dataSource;
     }
+	
+	@Bean(name="multipartResolver")
+	public CommonsMultipartResolver getCommonsMultipartResolver(){
+		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+		resolver.setMaxUploadSize(100000);
+		return resolver;
+	}
 	
 //	@Bean
 //	public BasicDataSource getDataSource(){

@@ -1,11 +1,14 @@
 package com.crawler.schema.model;
 
+import java.io.IOException;
 import java.util.Date;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class UploadRequest {
 	
 	Long uploadId;
-	String uploadContent;
+	MultipartFile uploadContentFile;
 	Date uploadTime;
 	String fileName;
 	public Long getUploadId() {
@@ -20,17 +23,21 @@ public class UploadRequest {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-	public String getUploadContent() {
-		return uploadContent;
+	public MultipartFile getUploadContentFile() {
+		return uploadContentFile;
 	}
-	public void setUploadContent(String uploadContent) {
-		this.uploadContent = uploadContent;
+	public void setUploadContentFile(MultipartFile uploadContentFile) {
+		this.uploadContentFile = uploadContentFile;
 	}
 	public Date getUploadTime() {
 		return uploadTime;
 	}
 	public void setUploadTime(Date uploadTime) {
 		this.uploadTime = uploadTime;
+	}
+	
+	public String getUploadContent() throws IOException{
+		return new String(getUploadContentFile().getBytes());
 	}
 	
 }

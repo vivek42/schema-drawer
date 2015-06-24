@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.crawler.schema.model.Event;
@@ -19,12 +18,10 @@ public class EventDao {
 	public static final String INSERT_EVENT = "insert into events (EVENT_ID, EVENT_CODE,EVENT_TIME, MESSAGE, STACK_TRACE, APPLICATION_NAME) "
 														+ "values (?, ?, ?, ?, ?,?)";
 
-	private JdbcTemplate jdbcTemplate;
 	private DataSource dataSource;
 
     @Autowired
     public EventDao(DataSource dataSource) {
-        jdbcTemplate = new JdbcTemplate(dataSource);
         this.dataSource = dataSource;
     }
 
@@ -42,9 +39,6 @@ public class EventDao {
 			ps.setString(6, event.getApplicationName());
 			ps.executeUpdate();
 			ps.close();
-//			jdbcTemplate.update(INSERT_EVENT, 
-//					event.getEventId().intValue(), event.getEventCode(), 
-//					event.getEventTime(), event.getMessage(), event.getStackTrack(), event.getApplicationName());
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally {
