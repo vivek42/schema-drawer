@@ -32,6 +32,8 @@ Under this task a simple web application will be implemented which should be abl
   
   g. Spring Security addition with login page - 2 week. Due Date June 29
   
+  h. Binary file to blob data. Due Date June 29
+  
 #### Measurement 
 This task will be measured in terms of demo of the project given. The demo of the this project should have all functionalities covered by the subtasks. Successful completion will involve having another engineer review and approve the demo. Estimate of task totals out to be 8 weeks. Due Date June 29
 
