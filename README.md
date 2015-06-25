@@ -30,9 +30,7 @@ Under this task a simple web application will be implemented which should be abl
   
   f. Add file browser widget to the home page and store file content in the database - 1 week . Due Date June 15
   
-  g. Display history of uploaded files on a separate page - 1 week . Due Date June 22
-  
-  h. Design the layout of UI to make it look good - 1 week . Due Date June 29
+  g. Spring Security addition with login page - 2 week. Due Date June 29
   
 #### Measurement 
 This task will be measured in terms of demo of the project given. The demo of the this project should have all functionalities covered by the subtasks. Successful completion will involve having another engineer review and approve the demo. Estimate of task totals out to be 8 weeks. Due Date June 29
