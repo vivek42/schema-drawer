@@ -30,28 +30,28 @@ Under this task a simple web application will be implemented which should be abl
   
   f. Add file browser widget to the home page and store file content in the database - 1 week . Due Date June 15
   
-  g. Spring Security addition with login page - 2 week. Due Date June 29
+  g. Spring Security addition with login page - 2 week. Due Date June 29 - in progress - pushed : July 26
   
-  h. Binary file to blob data. Due Date June 29
+  h. Binary file to blob data. Due Date June 29 - in progress - pushed : July 26
   
 #### Measurement 
-This task will be measured in terms of demo of the project given. The demo of the this project should have all functionalities covered by the subtasks. Successful completion will involve having another engineer review and approve the demo. Estimate of task totals out to be 8 weeks. Due Date June 29
+This task will be measured in terms of demo of the project given. The demo of the this project should have all functionalities covered by the subtasks. Successful completion will involve having another engineer review and approve the demo. Estimate of task totals out to be 8 weeks. Due Date June 29 - pushed : July 26
 
 ### 2. Create build scripts to build, deploy, and to perform testing
 
 Under this task the web application created above will be deployed and tested with build scripts. 
 
-  a. Write Gradle to build and deploy this project from source - 2 weeks . Due Date July 13
+  a. Write Gradle to build and deploy this project from source - 2 weeks . Due Date July 13 - Pushed July 27
   
-  b. Install Clover or similar software to check for code coverage - 1 week . Due Date July 20
+  b. Install Clover or similar software to check for code coverage - 1 week . Due Date July 20 - Pushed Aug 10
   
-  c. Perform unit testing for every source file written so far - 1 week . Due Date July 27
+  c. Perform unit testing for every source file written so far - 1 week . Due Date July 27 - Pushed Aug 17
   
-  d. Learn how to use Selenium, by writing a very basic test - 2 weeks. Due Date Aug 10
+  d. Learn how to use Selenium, by writing a very basic test - 2 weeks. Due Date Aug 10 - Pushed Sept 7
   
-  e. Write Selenium script to check the content upload from text box - 1 week . Due Date Aug 17
+  e. Write Selenium script to check the content upload from text box - 1 week . Due Date Aug 17 - Pushed Sept 14
   
-  g. Make sure the Gradle build performs unit testing (including Selenium testing) over the project which reports success/ errors and also the time elapsed and code coverage - 3 weeks. Due Date Sept 7
+  g. Make sure the Gradle build performs unit testing (including Selenium testing) over the project which reports success/ errors and also the time elapsed and code coverage - 3 weeks. Due Date Sept 7 - Pushed Sept 21
   
 #### Measurement 
 This task will be measured in terms of code and documentation submitted. The documentation should contain step by step process of deployment and testing of the project. Deployed at remote location from scratch this project should be able to perform/ display all sorts of testing covered in the subtasks. Successful completion will involve having another engineer read the documentation, and build and deploy the project. Estimate of the tasks totals out to be 10 weeks. Due Date Sept 7
