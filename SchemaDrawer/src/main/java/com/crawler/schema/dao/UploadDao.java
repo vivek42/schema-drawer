@@ -1,9 +1,10 @@
 package com.crawler.schema.dao;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import javax.sql.DataSource;
 
@@ -24,28 +25,24 @@ public class UploadDao {
         
     }
 
-	public void upload(UploadRequest uploadRequest, String uploadContent) {
-		Connection conn = null;
-		try{
-			conn = dataSource.getConnection();
+	public void upload(UploadRequest uploadRequest, byte[] uploadContent) {
+		try (final Connection conn = dataSource.getConnection()){
+			
+			// Converting byte[] into input stream
+			InputStream uploadStream = new ByteArrayInputStream(uploadContent);
+			
+			
 			PreparedStatement ps = conn.prepareStatement(INSERT_UPLOAD);
 			ps.setInt(1, uploadRequest.getUploadId().intValue());
-			ps.setString(2, uploadContent);
-			ps.setDate(3, new Date(uploadRequest.getUploadTime().getTime()));
+			ps.setBinaryStream(2, uploadStream);
+			java.util.Date currentDate = new java.util.Date();
+			ps.setTimestamp(3, new Timestamp(currentDate.getTime()));
 			ps.setString(4, uploadRequest.getFileName());
 			ps.executeUpdate();
 			ps.close();
 		
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					// Do nothing
-				}
-			}
 		}
 	}
 

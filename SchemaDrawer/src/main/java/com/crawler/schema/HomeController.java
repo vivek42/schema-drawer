@@ -61,7 +61,7 @@ public class HomeController {
 		try{
 			uploadRequest.setUploadId(oidService.getOid());
 			uploadRequest.setUploadTime(new Date());
-			String uploadContent = new String(uploadRequest.getUploadContentFile().getBytes());
+			byte[] uploadContent = uploadRequest.getUploadContentFile().getBytes();
 			uploadService.upload(uploadRequest, uploadContent);
 			message = "upload Successful!";
 		}catch(Exception e){

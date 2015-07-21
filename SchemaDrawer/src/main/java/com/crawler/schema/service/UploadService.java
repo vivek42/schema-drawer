@@ -11,7 +11,7 @@ public class UploadService {
 		this.uploadDao = dao;
 	}
 
-	public void upload(UploadRequest uploadRequest, String uploadContent) {
+	public void upload(UploadRequest uploadRequest, byte[] uploadContent) {
 		uploadDao.upload(uploadRequest, uploadContent);
 	}
 }

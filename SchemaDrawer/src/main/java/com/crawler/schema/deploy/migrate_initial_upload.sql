@@ -1,6 +1,6 @@
 CREATE TABLE uploads (
   upload_id INT NOT NULL AUTO_INCREMENT,
-  content VARCHAR(500) NULL,
+  content longblob NULL,
   upload_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (upload_id));
   
