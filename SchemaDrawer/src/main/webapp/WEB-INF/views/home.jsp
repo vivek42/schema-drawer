@@ -2,6 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page session="false" %>
 <html>
+<jsp:include page="header.jsp"/>
 <head>
 	<title>Home</title>
 </head>

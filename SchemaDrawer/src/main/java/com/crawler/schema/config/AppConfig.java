@@ -50,14 +50,4 @@ public class AppConfig {
 		return resolver;
 	}
 	
-//	@Bean
-//	public BasicDataSource getDataSource(){
-//		BasicDataSource dataSource = new BasicDataSource();
-//		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-//		dataSource.setUrl("jdbc:mysql://localhost:3306/schema-drawer");
-//		dataSource.setUsername("root");
-//		dataSource.setPassword("root");
-//		return dataSource;
-//	}
-
 }
