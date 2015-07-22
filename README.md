@@ -30,50 +30,50 @@ Under this task a simple web application will be implemented which should be abl
   
   f. Add file browser widget to the home page and store file content in the database - 1 week . Due Date June 15
   
-  g. Display history of uploaded files on a separate page - 1 week . Due Date June 22
+  g. Spring Security addition with login page - 2 week. Due Date June 29 - in progress - pushed : July 26
   
-  h. Design the layout of UI to make it look good - 1 week . Due Date June 29
+  h. Binary file to blob data. Due Date June 29 - in progress - pushed : July 26
   
 #### Measurement 
-This task will be measured in terms of demo of the project given. The demo of the this project should have all functionalities covered by the subtasks. Successful completion will involve having another engineer review and approve the demo. Estimate of task totals out to be 8 weeks. Due Date June 29
+This task will be measured in terms of demo of the project given. The demo of the this project should have all functionalities covered by the subtasks. Successful completion will involve having another engineer review and approve the demo. Estimate of task totals out to be 8 weeks. Due Date June 29 - pushed : July 26
 
 ### 2. Create build scripts to build, deploy, and to perform testing
 
 Under this task the web application created above will be deployed and tested with build scripts. 
 
-  a. Write Gradle to build and deploy this project from source - 2 weeks . Due Date July 13
+  a. Write Gradle to build and deploy this project from source - 2 weeks . Due Date July 13 - Pushed July 27
   
-  b. Install Clover or similar software to check for code coverage - 1 week . Due Date July 20
+  b. Install Clover or similar software to check for code coverage - 1 week . Due Date July 20 - Pushed Aug 10
   
-  c. Perform unit testing for every source file written so far - 1 week . Due Date July 27
+  c. Perform unit testing for every source file written so far - 1 week . Due Date July 27 - Pushed Aug 17
   
-  d. Learn how to use Selenium, by writing a very basic test - 2 weeks. Due Date Aug 10
+  d. Learn how to use Selenium, by writing a very basic test - 2 weeks. Due Date Aug 10 - Pushed Sept 7
   
-  e. Write Selenium script to check the content upload from text box - 1 week . Due Date Aug 17
+  e. Write Selenium script to check the content upload from text box - 1 week . Due Date Aug 17 - Pushed Sept 14
   
-  g. Make sure the Gradle build performs unit testing (including Selenium testing) over the project which reports success/ errors and also the time elapsed and code coverage - 3 weeks. Due Date Sept 7
+  g. Make sure the Gradle build performs unit testing (including Selenium testing) over the project which reports success/ errors and also the time elapsed and code coverage - 3 weeks. Due Date Sept 7 - Pushed Sept 21
   
 #### Measurement 
-This task will be measured in terms of code and documentation submitted. The documentation should contain step by step process of deployment and testing of the project. Deployed at remote location from scratch this project should be able to perform/ display all sorts of testing covered in the subtasks. Successful completion will involve having another engineer read the documentation, and build and deploy the project. Estimate of the tasks totals out to be 10 weeks. Due Date Sept 7
+This task will be measured in terms of code and documentation submitted. The documentation should contain step by step process of deployment and testing of the project. Deployed at remote location from scratch this project should be able to perform/ display all sorts of testing covered in the subtasks. Successful completion will involve having another engineer read the documentation, and build and deploy the project. Estimate of the tasks totals out to be 10 weeks. Due Date Sept 7 - Pushed Sept 21
 
 ### 3. Research SchemaCrawler to draw schema
 
-  a. Read about SchemaCrawler - 1 week. Due Date Sept 14
+  a. Read about SchemaCrawler - 1 week. Due Date Sept 14 - Pushed Sept 28
   
-  b. Make a list of features needed from SchemaCrawler for the project - 1 week. Due Date Sept 21
+  b. Make a list of features needed from SchemaCrawler for the project - 1 week. Due Date Sept 21 - Pushed Oct 5
   
-  c. Proof of concept and validate if each feature is available - 2 weeks. Due Date Oct 5
+  c. Proof of concept and validate if each feature is available - 2 weeks. Due Date Oct 5 - Pushed Oct 19
   
 ### Measurement
-This task will be measured in terms of documentation. This documentation should contain a report which includes the proof of concept for applicability of SchemaCrawler in the project. It must contain every feature we require/achieve from SchemaCrawler as well as feature we need to develop separately. Estimate of the task is coming out to be 4 weeks. Due Date Oct 5
+This task will be measured in terms of documentation. This documentation should contain a report which includes the proof of concept for applicability of SchemaCrawler in the project. It must contain every feature we require/achieve from SchemaCrawler as well as feature we need to develop separately. Estimate of the task is coming out to be 4 weeks. Due Date Oct 5 - Pushed Oct 19
 
 ### 4. Implement the functionality to upload files, and draw diagrams in the web application
 
-  a. Design data model which will be used to draw the images from the database - 1 week Due Date Oct 12
+  a. Design data model which will be used to draw the images from the database - 1 week Due Date Oct 12 - Pushed Oct 26
   
-  b. Integrate SchemaCrawler into the project - 1 week Due Date Oct 19
+  b. Integrate SchemaCrawler into the project - 1 week Due Date Oct 19 - Pushed Nov 2
   
-  c. Store the diagram in the database - 1 week Due Date Oct 26
+  c. Store the diagram in the database - 1 week Due Date Oct 26 - Pushed Nov 9
   
   d. Design how the image of the schema should look like (color of the nodes, fonts of the text present etc.) - 1 week Due Date Nov 2
   
