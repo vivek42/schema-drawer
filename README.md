@@ -30,9 +30,8 @@ Under this task a simple web application will be implemented which should be abl
   
   f. Add file browser widget to the home page and store file content in the database - 1 week . Due Date June 15
   
-  g. Spring Security addition with login page - 2 week. Due Date June 29 - in progress - pushed : July 26
+  g. Binary file to blob data. Done : July 26
   
-  h. Binary file to blob data. Due Date June 29 - in progress - pushed : July 26
   
 #### Measurement 
 This task will be measured in terms of demo of the project given. The demo of the this project should have all functionalities covered by the subtasks. Successful completion will involve having another engineer review and approve the demo. Estimate of task totals out to be 8 weeks. Due Date June 29 - pushed : July 26
@@ -41,7 +40,10 @@ This task will be measured in terms of demo of the project given. The demo of th
 
 Under this task the web application created above will be deployed and tested with build scripts. 
 
-  a. Write Gradle to build and deploy this project from source - 2 weeks . Due Date July 13 - Pushed July 27
+  a. Add Spring Security - 2 weeks . Due Date July 13 - Pushed August 10
+    1. Add login page - Done
+    2. Add dependencies and enable filter to make spring security active - August 6
+    3. Use database to maintain credentials - August 10
   
   b. Install Clover or similar software to check for code coverage - 1 week . Due Date July 20 - Pushed Aug 10
   
@@ -101,5 +103,11 @@ This task will be measured in terms of demo of the project given. The demo of th
   
 #### Measurement 
   This task will be measured in terms of demo of the project given. The demo of the this project should have all functionalities covered by the subtasks. The demo for this subtask can be a selenium test. Estimate of task totals out to be 7 weeks.
+  
+  ####BackLog
+  
+  a. Move to gradle build from Maven.
+  
+  
   
   
