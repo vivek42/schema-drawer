@@ -1,4 +1,4 @@
-package com.crawler.schema.dao;
+package com.crawler.schema.web.dao;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.crawler.schema.model.UploadRequest;
+import com.crawler.schema.web.model.UploadRequest;
 
 public class UploadDao {
 	
@@ -26,8 +26,9 @@ public class UploadDao {
     }
 
 	public void upload(UploadRequest uploadRequest, byte[] uploadContent) {
-		try (final Connection conn = dataSource.getConnection()){
+		try {
 			
+			Connection conn = dataSource.getConnection();
 			// Converting byte[] into input stream
 			InputStream uploadStream = new ByteArrayInputStream(uploadContent);
 			

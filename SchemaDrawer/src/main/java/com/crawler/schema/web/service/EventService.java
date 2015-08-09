@@ -1,7 +1,7 @@
-package com.crawler.schema.service;
+package com.crawler.schema.web.service;
 
-import com.crawler.schema.dao.EventDao;
-import com.crawler.schema.model.Event;
+import com.crawler.schema.web.dao.EventDao;
+import com.crawler.schema.web.model.Event;
 
 public class EventService {
 	

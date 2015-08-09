@@ -1,7 +1,7 @@
-package com.crawler.schema.service;
+package com.crawler.schema.web.service;
 
-import com.crawler.schema.dao.UploadDao;
-import com.crawler.schema.model.UploadRequest;
+import com.crawler.schema.web.dao.UploadDao;
+import com.crawler.schema.web.model.UploadRequest;
 
 public class UploadService {
 	

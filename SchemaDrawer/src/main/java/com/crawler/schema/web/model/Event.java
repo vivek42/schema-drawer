@@ -1,4 +1,4 @@
-package com.crawler.schema.model;
+package com.crawler.schema.web.model;
 
 import java.util.Date;
 

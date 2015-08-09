@@ -1,4 +1,4 @@
-package com.crawler.schema.dao;
+package com.crawler.schema.web.dao;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.crawler.schema.model.Event;
+import com.crawler.schema.web.model.Event;
 
 @Repository
 public class EventDao {

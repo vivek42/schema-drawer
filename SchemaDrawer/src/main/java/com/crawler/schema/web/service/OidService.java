@@ -1,4 +1,4 @@
-package com.crawler.schema.service;
+package com.crawler.schema.web.service;
 
 public class OidService {
 

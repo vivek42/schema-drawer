@@ -1,4 +1,4 @@
-package com.crawler.schema.config;
+package com.crawler.schema.web.config;
 
 import javax.sql.DataSource;
 
@@ -7,11 +7,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
-import com.crawler.schema.dao.EventDao;
-import com.crawler.schema.dao.UploadDao;
-import com.crawler.schema.service.EventService;
-import com.crawler.schema.service.OidService;
-import com.crawler.schema.service.UploadService;
+import com.crawler.schema.web.dao.EventDao;
+import com.crawler.schema.web.dao.UploadDao;
+import com.crawler.schema.web.service.EventService;
+import com.crawler.schema.web.service.OidService;
+import com.crawler.schema.web.service.UploadService;
 
 
 @Configuration

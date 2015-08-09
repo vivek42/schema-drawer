@@ -1,4 +1,4 @@
-package com.crawler.schema;
+package com.crawler.schema.web;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -17,17 +17,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.crawler.schema.model.Event;
-import com.crawler.schema.model.UploadRequest;
-import com.crawler.schema.service.EventService;
-import com.crawler.schema.service.OidService;
-import com.crawler.schema.service.UploadService;
+import com.crawler.schema.web.model.Event;
+import com.crawler.schema.web.model.UploadRequest;
+import com.crawler.schema.web.service.EventService;
+import com.crawler.schema.web.service.OidService;
+import com.crawler.schema.web.service.UploadService;
 
 @Controller
 @SessionAttributes("uploadRequest")
 public class HomeController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	protected UploadService uploadService;
 	protected EventService eventService;
@@ -40,10 +38,8 @@ public class HomeController {
 		this.oidService = oidService;
 	}
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/upload", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
@@ -55,7 +51,7 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/upload", method = RequestMethod.POST)
 	public ModelAndView submitUploadContent(@ModelAttribute UploadRequest uploadRequest, HttpServletRequest request){
 		String message;
 		try{
