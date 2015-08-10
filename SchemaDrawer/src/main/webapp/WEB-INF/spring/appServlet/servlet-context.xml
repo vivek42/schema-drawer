@@ -37,7 +37,7 @@
 		</beans:bean>
 	</interceptors>
 
-	<context:component-scan base-package="com.crawler.schema.web.*" />
+	<context:component-scan base-package="com.crawler.schema.*" />
 
 <!-- 	<beans:bean id="encoder" -->
 <!-- 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"> -->

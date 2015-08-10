@@ -74,4 +74,15 @@ public class HomeController {
 		return new ModelAndView("message");
 	}
 	
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String testPublicPage() {
+		return "testPublicPage";
+	}
+	
+	@RequestMapping(value = "/admin/privatePage", method = RequestMethod.GET)
+	public String privatePage() {
+		return "testPrivatePage";
+	}
+	
 }
