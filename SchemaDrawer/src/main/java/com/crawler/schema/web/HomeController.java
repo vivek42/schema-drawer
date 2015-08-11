@@ -38,8 +38,13 @@ public class HomeController {
 		this.oidService = oidService;
 	}
 	
+	@RequestMapping(value = "/" , method = RequestMethod.GET)
+	public ModelAndView redirectHome(Locale locale, Model model) {
+		return new ModelAndView("redirect:/admin/upload");
+	}
+	
 	@RequestMapping(value = "/admin/upload", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public ModelAndView home(Locale locale, Model model) {
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
@@ -48,7 +53,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		return new ModelAndView("home");
 	}
 	
 	@RequestMapping(value = "/admin/upload", method = RequestMethod.POST)
@@ -72,12 +77,6 @@ public class HomeController {
 		// TODO : add request object and service for inserting the uploaded content
 		request.setAttribute("message", message);
 		return new ModelAndView("message");
-	}
-	
-	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String testPublicPage() {
-		return "testPublicPage";
 	}
 	
 	@RequestMapping(value = "/admin/privatePage", method = RequestMethod.GET)
