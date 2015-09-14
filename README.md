@@ -32,10 +32,32 @@ Under this task a simple web application will be implemented which should be abl
   
   g. Binary file to blob data. Done : July 26
   
+####Status 
+Completed
+  
   
 #### Measurement 
 This task will be measured in terms of demo of the project given. The demo of the this project should have all functionalities covered by the subtasks. Successful completion will involve having another engineer review and approve the demo. Estimate of task totals out to be 8 weeks. Due Date June 29 - pushed : July 26
 
+
+### 2. Add Spring Security and User Profiles
+
+Under this task the web application created will be enhanced with Spring security, which means the web application will need authentication to proceed. User profiles will be a by product of this enhancement as the authentication will only be complete with user profiles.
+
+  a. Add Spring Security without database authentication. 
+  Due Date : August 10
+  Status : Complete
+  
+  b. Add UI pages which includes login and logout, and update existing ui pages to show presence of session (logout button, and Username).
+  Due Date : August 25
+  Status : Complete
+  
+  c. Add Junit Testing for classes created so far.
+  Due Date : August 31
+  Status : Pending
+  
+  d. Refactor the code as testing proceeds.
+  Due Date : 
 ### 2. Create build scripts to build, deploy, and to perform testing
 
 Under this task the web application created above will be deployed and tested with build scripts. 
