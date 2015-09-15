@@ -54,81 +54,115 @@ Under this task the web application created will be enhanced with Spring securit
   
   c. Add Junit Testing for classes created so far.
   Due Date : August 31
-  Status : Pending
+  Status : Working
   
   d. Refactor the code as testing proceeds.
-  Due Date : 
-### 2. Create build scripts to build, deploy, and to perform testing
-
-Under this task the web application created above will be deployed and tested with build scripts. 
-
-  a. Add Spring Security - 2 weeks . Due Date July 13 - Pushed August 10
-    1. Add login page - Done
-    2. Add dependencies and enable filter to make spring security active - August 6
-    3. Use database to maintain credentials - August 10
+  Due Date : Sep 7
+  Status : Working
   
-  b. Install Clover or similar software to check for code coverage - 1 week . Due Date July 20 - Pushed Aug 10
+  e. Add User Profile Page
+  Due Date : Sept 28
+  Status : Working
   
-  c. Perform unit testing for every source file written so far - 1 week . Due Date July 27 - Pushed Aug 17
+  f. Junit Testing and Refactor
+  Due Date : Oct 5
+  Status : Not Started
   
-  d. Learn how to use Selenium, by writing a very basic test - 2 weeks. Due Date Aug 10 - Pushed Sept 7
+  g. Integration or Black Box Testing
+  Due Date : Oct 12
+  Status : Not Started
   
-  e. Write Selenium script to check the content upload from text box - 1 week . Due Date Aug 17 - Pushed Sept 14
+  h. Refactor the code as Testing Proceeds
+  Due Date : Oct 19
+  Status : Not Started
   
-  g. Make sure the Gradle build performs unit testing (including Selenium testing) over the project which reports success/ errors and also the time elapsed and code coverage - 3 weeks. Due Date Sept 7 - Pushed Sept 21
+####Status 
+Completed
+  
   
 #### Measurement 
-This task will be measured in terms of code and documentation submitted. The documentation should contain step by step process of deployment and testing of the project. Deployed at remote location from scratch this project should be able to perform/ display all sorts of testing covered in the subtasks. Successful completion will involve having another engineer read the documentation, and build and deploy the project. Estimate of the tasks totals out to be 10 weeks. Due Date Sept 7 - Pushed Sept 21
+This task will be measured in terms of demo of the project given. The demo of the this project should have all functionalities covered by the subtasks. Successful completion will involve having another engineer review and approve the demo. Due Date Oct 19
 
+  
 ### 3. Research SchemaCrawler to draw schema
 
-  a. Read about SchemaCrawler - 1 week. Due Date Sept 14 - Pushed Sept 28
+  a. Read about SchemaCrawler - 1 week. 
+  Due Date : 
+  Status : Not Started
   
-  b. Make a list of features needed from SchemaCrawler for the project - 1 week. Due Date Sept 21 - Pushed Oct 5
+  b. Make a list of features needed from SchemaCrawler for the project - 1 week. 
+  Due Date : 
+  Status : Not Started
   
-  c. Proof of concept and validate if each feature is available - 2 weeks. Due Date Oct 5 - Pushed Oct 19
+  c. Proof of concept and validate if each feature is available - 2 weeks. 
+  Due Date : 
+  Status : Not Started
   
 ### Measurement
-This task will be measured in terms of documentation. This documentation should contain a report which includes the proof of concept for applicability of SchemaCrawler in the project. It must contain every feature we require/achieve from SchemaCrawler as well as feature we need to develop separately. Estimate of the task is coming out to be 4 weeks. Due Date Oct 5 - Pushed Oct 19
+This task will be measured in terms of documentation. This documentation should contain a report which includes the proof of concept for applicability of SchemaCrawler in the project. It must contain every feature we require/achieve from SchemaCrawler as well as feature we need to develop separately. Due Date Oct 5 - Pushed Oct 19
 
 ### 4. Implement the functionality to upload files, and draw diagrams in the web application
 
-  a. Design data model which will be used to draw the images from the database - 1 week Due Date Oct 12 - Pushed Oct 26
+  a. Design data model which will be used to draw the images from the database - 1 week 
+  Due Date : 
+  Status : Not Started
   
-  b. Integrate SchemaCrawler into the project - 1 week Due Date Oct 19 - Pushed Nov 2
+  b. Integrate SchemaCrawler into the project - 1 week 
+  Due Date : 
+  Status : Not Started
   
-  c. Store the diagram in the database - 1 week Due Date Oct 26 - Pushed Nov 9
+  c. Store the diagram in the database - 1 week 
+  Due Date : 
+  Status : Not Started
   
-  d. Design how the image of the schema should look like (color of the nodes, fonts of the text present etc.) - 1 week Due Date Nov 2
+  d. Design how the image of the schema should look like (color of the nodes, fonts of the text present etc.) - 1 week 
+  Due Date : 
+  Status : Not Started
   
-  e. Research on best way to draw the images, as part of back end or through javascripts in front end itself - 1 week Due Date Nov 9
+  e. Research on best way to draw the images, as part of back end or through javascripts in front end itself - 1 week 
+  Due Date : 
+  Status : Not Started
   
-  f. Create a new web page to allow users to upload a SQLite file, and view the diagram - 2 weeks Due Date Nov 23
+  f. Create a new web page to allow users to upload a SQLite file, and view the diagram - 2 weeks 
+  Due Date : 
+  Status : Not Started
   
-  g. Deploy to "production", that is, a free hosting site that allows you to run a Java web application - 3 weeks Due Date Dec 14
+  g. Deploy to "production", that is, a free hosting site that allows you to run a Java web application - 3 weeks   Due Date : 
+  Status : Not Started
   
 #### Measurement 
-This task will be measured in terms of demo of the project given. The demo of the this project should have all functionalities covered by the subtasks. The demo for this subtask can be a Selenium test. Successful completion will involve having another engineer use the live product. Estimate of task totals out to be 10 weeks.
+This task will be measured in terms of demo of the project given. The demo of the this project should have all functionalities covered by the subtasks. The demo for this subtask can be a Selenium test. Successful completion will involve having another engineer use the live product. 
 
-### 5. Implement profile creation for users. 
-  a. Extend the Data design to accomodate user profiles - 1 week Due Date Dec 21
+### 4. Create build scripts to build, deploy, and to perform testing
+
+Under this task the web application created above will be deployed and tested with build scripts. 
+
+  a. Install Clover or similar software to check for code coverage - 1 week .
+  Due Date :
+  Status : Not Started
   
-  b. Draw layout for the Registration page - 1 week Due Date Dec 28
+  b. Complete code coverage for the project - 1 week.
+  Due Date :
+  Status : Not Started
   
-  c. Add/Implement registration page to the web application - 1 week Due Date Jan 4
+  c. Learn how to use Selenium, by writing a very basic test - 2 weeks. 
+  Due Date : 
+  Status : Not Started
   
-  d. Design layout for user profiles - 1 week Due Date Jan 11
+  d. Write Selenium script to check the content upload from text box - 1 week . 
+  Due Date : 
+  Status : Not Started
   
-  e. Add/Implement user profile page - 1 week Due Date Jan 18
-  
-  f. Add support for different extensions for images drawn. - 2 weeks Due Date Feb 1 
+  e. Make sure the Gradle build performs unit testing (including Selenium testing) over the project which reports success/ errors and also the time elapsed and code coverage - 3 weeks. 
+  Due Date :
+  Status : Not Started
   
 #### Measurement 
-  This task will be measured in terms of demo of the project given. The demo of the this project should have all functionalities covered by the subtasks. The demo for this subtask can be a selenium test. Estimate of task totals out to be 7 weeks.
+This task will be measured in terms of code and documentation submitted. The documentation should contain step by step process of deployment and testing of the project. Deployed at remote location from scratch this project should be able to perform/ display all sorts of testing covered in the subtasks. Successful completion will involve having another engineer read the documentation, and build and deploy the project. 
   
-  ####BackLog
+####BackLog
   
-  a. Move to gradle build from Maven.
+a. Move to gradle build from Maven.
   
   
   
