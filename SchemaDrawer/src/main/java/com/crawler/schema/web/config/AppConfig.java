@@ -9,9 +9,12 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.crawler.schema.web.dao.EventDao;
 import com.crawler.schema.web.dao.UploadDao;
+import com.crawler.schema.web.dao.impl.UserDaoImpl;
 import com.crawler.schema.web.service.EventService;
 import com.crawler.schema.web.service.OidService;
 import com.crawler.schema.web.service.UploadService;
+import com.crawler.schema.web.service.UserService;
+import com.crawler.schema.web.service.impl.UserServiceImpl;
 
 
 @Configuration
@@ -20,6 +23,11 @@ public class AppConfig {
 	@Bean
 	public UploadService getUploadService(){
 		return new UploadService(new UploadDao(getDataSource()));
+	}
+	
+	@Bean
+	public UserServiceImpl getUserService() {
+		return new UserServiceImpl(new UserDaoImpl(getDataSource()));
 	}
 	
 	@Bean
