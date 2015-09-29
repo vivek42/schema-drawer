@@ -44,15 +44,8 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/admin/upload", method = RequestMethod.GET)
-	public ModelAndView home(Locale locale, Model model) {
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
+	public ModelAndView home(Model model) {
 		model.addAttribute("uploadRequest", new UploadRequest());
-		
-		model.addAttribute("serverTime", formattedDate );
-		
 		return new ModelAndView("home");
 	}
 	

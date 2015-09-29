@@ -10,9 +10,6 @@
 <h1>
 	Hello world!  
 </h1>
-
-<P>  The time on the server is ${serverTime}. </P>
-
 <h2>Upload Box</h2>
 	<form:form id="uploadRequestForm" action="/schema/upload" commandName="uploadRequest" method="post" enctype="multipart/form-data">
 			<table>
