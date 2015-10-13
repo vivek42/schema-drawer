@@ -54,11 +54,11 @@ Under this task the web application created will be enhanced with Spring securit
   
   c. Add Junit Testing for classes created so far.
   Due Date : August 31
-  Status : Working
+  Status : Complete
   
   d. Refactor the code as testing proceeds.
   Due Date : Sep 7
-  Status : Working
+  Status : Complete
   
   e. Add User Profile Page
   Due Date : Sept 28
@@ -66,7 +66,7 @@ Under this task the web application created will be enhanced with Spring securit
   
   f. Junit Testing and Refactor
   Due Date : Oct 5
-  Status : Not Started
+  Status : Working
   
   g. Integration or Black Box Testing
   Due Date : Oct 12
