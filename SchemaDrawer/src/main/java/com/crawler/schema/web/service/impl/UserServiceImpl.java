@@ -29,4 +29,9 @@ public class UserServiceImpl implements UserService {
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
+
+	@Override
+	public void updatePassword(User user) {
+		userDao.updatePassword(user);
+	}
 }

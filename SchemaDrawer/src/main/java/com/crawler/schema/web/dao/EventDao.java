@@ -50,8 +50,5 @@ public class EventDao {
 				}
 			}
 		}
-    	
-    	
-    	System.out.println("Event successfully logged!");
     }
 }

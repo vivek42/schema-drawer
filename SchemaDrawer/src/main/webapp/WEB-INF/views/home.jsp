@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>
-	Hello world!  
+	Welcome!  
 </h1>
 <h2>Upload Box</h2>
 	<form:form id="uploadRequestForm" action="/schema/upload" commandName="uploadRequest" method="post" enctype="multipart/form-data">

@@ -35,5 +35,10 @@ public class UserDaoImpl implements UserDao {
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
+
+	@Override
+	public void updatePassword(User user) {
+		// TODO Auto-generated method stub
+	}
 	
 }
