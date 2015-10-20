@@ -62,11 +62,11 @@ Under this task the web application created will be enhanced with Spring securit
   
   e. Add User Profile Page
   Due Date : Sept 28
-  Status : Working
+  Status : Complete
   
   f. Junit Testing and Refactor
   Due Date : Oct 5
-  Status : Working
+  Status : Complete
   
   g. Integration or Black Box Testing
   Due Date : Oct 12
@@ -88,7 +88,7 @@ This task will be measured in terms of demo of the project given. The demo of th
 
   a. Read about SchemaCrawler - 1 week. 
   Due Date : Oct 25
-  Status : Not Started
+  Status : Started
   
   b. Make a list of features needed from SchemaCrawler for the project - 1 week. 
   Due Date : Oct 31
@@ -154,7 +154,7 @@ Under this task the web application created above will be deployed and tested wi
   Status : Not Started
   
 #### Measurement 
-This task will be measured in terms of code and documentation submitted. The documentation should contain step by step process of deployment and testing of the project. Deployed at remote location from scratch this project should be able to perform/ display all sorts of testing covered in the subtasks. Successful completion will involve having another engineer read the documentation, and build and deploy the project. Feb 19
+This task will be measured in terms of code and documentation submitted. The documentation should contain step by step process of deployment and testing of the project. Deployed at remote location from scratch this project should be able to perform/ display all sorts of testing covered in the subtasks. Successful completion will involve having another engineer read the documentation, and build and deploy the project. Feb 19 - Pushed Feb 26
   
 ####BackLog
   
