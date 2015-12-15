@@ -8,6 +8,13 @@ public class User {
 	private String password;
 	private Date createDate;
 	private String email;
+	private boolean isActive;
+	public boolean isActive() {
+		return isActive;
+	}
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
 	public int getUserId() {
 		return userId;
 	}

@@ -24,8 +24,11 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User findUserByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		User testUser = new User();
+		testUser.setActive(true);
+		testUser.setUsername(username);
+		testUser.setPassword("test");
+		return testUser;
 	}
 
 	public DataSource getDataSource() {
