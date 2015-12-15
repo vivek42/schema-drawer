@@ -88,73 +88,79 @@ This task will be measured in terms of demo of the project given. The demo of th
 
   a. Read about SchemaCrawler - 1 week. 
   Due Date : Oct 25
+  Status : Completed
+  
+  Pushing the dates back due to vacation and adding new tasks according to the needs.
+  
+  b. Re-read about SchemaCrawler - 1 week.
+  Due Date : 21 Dec
   Status : Started
   
   b. Make a list of features needed from SchemaCrawler for the project - 1 week. 
-  Due Date : Oct 31
+  Due Date : 28 Dec
   Status : Not Started
   
-  c. Proof of concept and validate if each feature is available - 2 weeks. 
-  Due Date : Nov 7
+  c. Proof of concept and validate if each feature is available - 1 week. 
+  Due Date : 4 Jan
   Status : Not Started
   
 ### Measurement
-This task will be measured in terms of documentation. This documentation should contain a report which includes the proof of concept for applicability of SchemaCrawler in the project. It must contain every feature we require/achieve from SchemaCrawler as well as feature we need to develop separately. Due Date Oct 5 - Pushed Nov 7
+This task will be measured in terms of documentation. This documentation should contain a report which includes the proof of concept for applicability of SchemaCrawler in the project. It must contain every feature we require/achieve from SchemaCrawler as well as feature we need to develop separately. Due Date Oct 5 - Pushed Nov 7 - Pushed again 4 Jan
 
 ### 4. Implement the functionality to upload files, and draw diagrams in the web application
 
   a. Design data model which will be used to draw the images from the database - 1 week 
-  Due Date : Nov 14
+  Due Date : Jan 11
   Status : Not Started
   
   b. Integrate SchemaCrawler into the project - 1 week 
-  Due Date : Nov 21
+  Due Date : Jan 18
   Status : Not Started
   
-  c. Store the diagram in the database - 1 week 
-  Due Date : Nov 28
+  c. Store the diagram in the database - 2 weeks 
+  Due Date : 1 Feb
   Status : Not Started
   
   d. Design how the image of the schema should look like (color of the nodes, fonts of the text present etc.) - 1 week 
-  Due Date : Dec 5
+  Due Date : 8 Feb
   Status : Not Started
   
   e. Research on best way to draw the images, as part of back end or through javascripts in front end itself - 1 week 
-  Due Date : Dec 11
+  Due Date : 15 Feb
   Status : Not Started
   
-  f. Create a new web page to allow users to upload a SQLite file, and view the diagram - 2 weeks 
-  Due Date : Dec 25
+  f. Create a new web page to allow users to upload a SQLite file, and view the diagram - 1 week 
+  Due Date : 21 Feb
   Status : Not Started
   
 #### Measurement 
-This task will be measured in terms of demo of the project given. The demo of the this project should have all functionalities covered by the subtasks. The demo for this subtask can be a Selenium test. Successful completion will involve having another engineer use the live product. Due Date is Dec 25
+This task will be measured in terms of demo of the project given. The demo of the this project should have all functionalities covered by the subtasks. The demo for this subtask can be a Selenium test. Successful completion will involve having another engineer use the live product. Due Date is Dec 25 - Pushed 15 Feb
 
 ### 4. Create build scripts to build, deploy, and to perform testing
 
 Under this task the web application created above will be deployed and tested with build scripts. 
 
   a. Install Clover or similar software to check for code coverage - 1 week .
-  Due Date : Jan 1
+  Due Date : 21 Feb
   Status : Not Started
   
   b. Complete code coverage for the project - 1 week.
-  Due Date : Jan 8
+  Due Date : 28 Feb
   Status : Not Started
   
-  c. Add Selenium Testing to the project - 2 weeks. 
-  Due Date : Jan 22
+  c. Add Selenium Testing to the project - 1 week. 
+  Due Date : Mar 6
   Status : Not Started
   
   e. Make sure the build performs unit testing (including Selenium testing) over the project which reports success/ errors and also the time elapsed and code coverage - 1 weeks. 
-  Due Date : Jan 29
+  Due Date : Mar 13
   Status : Not Started
   
-    g. Deploy to "production", that is, a free hosting site that allows you to run a Java web application - 3 weeks   Due Date : Feb 19
+    g. Deploy to "production", that is, a free hosting site that allows you to run a Java web application - 1 week   Due Date : 20 Mar
   Status : Not Started
   
 #### Measurement 
-This task will be measured in terms of code and documentation submitted. The documentation should contain step by step process of deployment and testing of the project. Deployed at remote location from scratch this project should be able to perform/ display all sorts of testing covered in the subtasks. Successful completion will involve having another engineer read the documentation, and build and deploy the project. Feb 19 - Pushed Feb 26
+This task will be measured in terms of code and documentation submitted. The documentation should contain step by step process of deployment and testing of the project. Deployed at remote location from scratch this project should be able to perform/ display all sorts of testing covered in the subtasks. Successful completion will involve having another engineer read the documentation, and build and deploy the project. Feb 19 - Pushed Feb 26 - Mar 20
   
 ####BackLog
   
