@@ -11,7 +11,7 @@
 	Welcome!  
 </h1>
 <h2>Upload Box</h2>
-	<form:form id="uploadRequestForm" action="/schema/upload" commandName="uploadRequest" method="post" enctype="multipart/form-data">
+	<form:form id="uploadRequestForm" action="/schema/admin/upload" commandName="uploadRequest" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td>Enter desired fileName :</td>
