@@ -42,11 +42,15 @@ public class AppConfig {
 	
 	@Bean
     public DataSource getDataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/schema_drawer");
-        dataSource.setUsername("vivek");
-        dataSource.setPassword("P@ssword");
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName("org.sqlite.JDBC");
+		dataSource.setUrl("jdbc:sqlite:/Users/vivekchouhan/sqliteDb/schemaDrawer.db");
+		
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+//        dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/schema_drawer");
+//        dataSource.setUsername("vivek");
+//        dataSource.setPassword("P@ssword");
          
         return dataSource;
     }
