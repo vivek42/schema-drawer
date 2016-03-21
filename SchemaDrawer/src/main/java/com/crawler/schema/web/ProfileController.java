@@ -24,7 +24,7 @@ public class ProfileController {
 	
 	@RequestMapping(value = "/profile/changePassword", method = RequestMethod.POST)
 	public ModelAndView changePassword(@ModelAttribute User user) {
-		userService.updatePassword(user);
+		//userService.updatePassword(user);
 		return new ModelAndView("redirect:/login");
 	}
 	

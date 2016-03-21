@@ -1,14 +1,20 @@
 package com.crawler.schema.web.model;
 
-import java.util.Date;
+import java.util.List;
 
 public class User {
 	private int userId;
 	private String username;
 	private String password;
-	private Date createDate;
-	private String email;
 	private boolean isActive;
+	private List<Role> roles;
+	
+	public List<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
 	public boolean isActive() {
 		return isActive;
 	}
@@ -33,17 +39,4 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Date getCreateDate() {
-		return createDate;
-	}
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
 }

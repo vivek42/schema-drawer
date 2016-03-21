@@ -4,7 +4,6 @@ import com.crawler.schema.web.model.User;
 
 public interface UserService {
 
-	User addUser(User user);
-	User findUserByUsername(String username);
-	void updatePassword(User user);
+	void addUser(User user);
+	User findUserByName(String username);
 }

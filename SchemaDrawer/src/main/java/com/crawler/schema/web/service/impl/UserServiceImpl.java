@@ -13,13 +13,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User addUser(User user) {
-		return userDao.addUser(user);
+	public void addUser(User user) {
+		userDao.addUser(user);
 	}
 
 	@Override
-	public User findUserByUsername(String username) {
-		return userDao.findUserByUsername(username);
+	public User findUserByName(String username) {
+		return userDao.findUserByName(username);
 	}
 
 	public UserDao getUserDao() {
@@ -30,8 +30,4 @@ public class UserServiceImpl implements UserService {
 		this.userDao = userDao;
 	}
 
-	@Override
-	public void updatePassword(User user) {
-		userDao.updatePassword(user);
-	}
 }
