@@ -1,13 +1,10 @@
 package com.crawler.schema.web;
 
-import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,7 +35,7 @@ public class HomeController {
 		this.oidService = oidService;
 	}
 	
-	@RequestMapping(value = "/" , method = RequestMethod.GET)
+	@RequestMapping(value = "/home" , method = RequestMethod.GET)
 	public ModelAndView redirectHome(Locale locale, Model model) {
 		return new ModelAndView("redirect:/admin/upload");
 	}

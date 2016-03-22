@@ -131,6 +131,8 @@ public class UserDaoImpl implements UserDao {
 	public User findUserByName(String username) {
 		User user = new User();
 		user.setUsername(username);
+		List<Role> roles = new ArrayList<Role>();
+		user.setRoles(roles);
 		try {
 			Connection conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement("select * from user where username=?");
@@ -148,7 +150,7 @@ public class UserDaoImpl implements UserDao {
 			while(rs.next()){
 				Role role = new Role();
 				role.setRoleId(rs.getInt("role_id"));
-				role.setRoleName(rs.getString("roleName"));
+				role.setRoleName(rs.getString("rolename"));
 				user.getRoles().add(role);
 			}
 			ps.close();

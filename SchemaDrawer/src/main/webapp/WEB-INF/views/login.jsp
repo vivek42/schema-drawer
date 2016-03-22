@@ -1,12 +1,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ page session="false" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@ page session="true" %>
 <html>
 <head>
 	<title>Login</title>
 </head>
 <body>
-<h1>Enter your credentials : </h1>
+<h1>Please enter your credentials below : </h1>
     <form action = "j_spring_security_check" method = "POST" >
 	  <table>
 		<tr>
@@ -22,7 +24,7 @@
 		</tr>
 	  </table>
 	 </form>
-	 <font>
+	 <font color="red">
 	   <span>${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</span>
 	 </font>
 </body>
