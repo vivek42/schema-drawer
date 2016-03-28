@@ -7,9 +7,11 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Welcome!  
-</h1>
+<h1>Welcome!</h1><br/>
+<c:if test="${message !=null}">
+	<p>${message}</p><br/>
+	<c:remove var="message"/>
+</c:if>
 <h2>Upload Box</h2>
 	<form:form id="uploadRequestForm" action="/schema/admin/upload" commandName="uploadRequest" method="post" enctype="multipart/form-data">
 			<table>

@@ -8,6 +8,9 @@
 	<title>Login</title>
 </head>
 <body>
+<c:if test="${message != null}">
+   <p>${message}<p>
+</c:if>
 <h1>Please enter your credentials below : </h1>
     <form action = "j_spring_security_check" method = "POST" >
 	  <table>
@@ -27,5 +30,8 @@
 	 <font color="red">
 	   <span>${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</span>
 	 </font>
+	 <table>
+	   <tr><td>First time users-</td><td><a href="/schema/profile/create">Register here!</a></td></tr>
+	 </table>
 </body>
 </html>

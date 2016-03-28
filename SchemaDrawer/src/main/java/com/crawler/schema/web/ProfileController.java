@@ -5,11 +5,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.crawler.schema.web.model.Event;
 import com.crawler.schema.web.model.UploadRequest;
@@ -41,11 +43,12 @@ public class ProfileController {
 		return new ModelAndView("signup");
 	}
 	
-	@RequestMapping(value = "/profile/create", method=RequestMethod.GET)
-	public ModelAndView submitProfilePage(@ModelAttribute UserProfile profile, HttpServletRequest request) {
+	@RequestMapping(value = "/profile/create", method=RequestMethod.POST)
+	public ModelAndView submitProfilePage(@ModelAttribute UserProfile profile, BindingResult result, RedirectAttributes redirectAttrs) {
 		String message = "";
 		try {
-			//TODO : save the user and redirect to login page with a message
+			//TODO : save the user do the hex encoding of the password and redirect to login page with a message
+			message="User profile successfully created! Please login to continue!";
 		}catch (Exception e) {
 			Event event = new Event();
 			event.setEventId(oidService.getOid());
@@ -56,8 +59,8 @@ public class ProfileController {
 			message = "we have encountered an error";
 		}
 		// TODO : add request object and service for inserting the uploaded content
-		request.setAttribute("message", message);
-		return new ModelAndView("login");
+		redirectAttrs.addFlashAttribute("message", message);
+		return new ModelAndView("redirect:/home");
 	}
 	
 	@RequestMapping(value = "/profile/changePassword", method = RequestMethod.POST)

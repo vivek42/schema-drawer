@@ -66,7 +66,7 @@ public class HomeController {
 		}
 		// TODO : add request object and service for inserting the uploaded content
 		request.setAttribute("message", message);
-		return new ModelAndView("message");
+		return new ModelAndView("home");
 	}
 	
 	@RequestMapping(value = "/admin/privatePage", method = RequestMethod.GET)
