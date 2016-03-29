@@ -13,7 +13,6 @@ import com.crawler.schema.web.dao.impl.UserDaoImpl;
 import com.crawler.schema.web.service.EventService;
 import com.crawler.schema.web.service.OidService;
 import com.crawler.schema.web.service.UploadService;
-import com.crawler.schema.web.service.UserService;
 import com.crawler.schema.web.service.impl.UserServiceImpl;
 
 
@@ -27,7 +26,7 @@ public class AppConfig {
 	
 	@Bean
 	public UserServiceImpl getUserService() {
-		return new UserServiceImpl(new UserDaoImpl(getDataSource()));
+		return new UserServiceImpl(new UserDaoImpl(getDataSource()), getOidService());
 	}
 	
 	@Bean

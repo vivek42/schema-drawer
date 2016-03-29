@@ -3,7 +3,7 @@ package com.crawler.schema.web.model;
 import java.util.List;
 
 public class User {
-	private int userId;
+	private long userId;
 	private String username;
 	private String password;
 	private boolean isActive;
@@ -21,10 +21,10 @@ public class User {
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 	public String getUsername() {

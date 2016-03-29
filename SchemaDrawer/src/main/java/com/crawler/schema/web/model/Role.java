@@ -1,8 +1,15 @@
 package com.crawler.schema.web.model;
 
-public class Role {
+public enum Role {
+	
+	ADMIN(1, "admin");
+
 	int roleId;
 	String roleName;
+	Role(int roleId, String roleName) {
+		this.roleId = roleId;
+		this.roleName = roleName;
+	}
 	public int getRoleId() {
 		return roleId;
 	}
@@ -15,5 +22,12 @@ public class Role {
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
-	
+	public static Role getRoleByName(String roleName) {
+		for (Role role : values()) {
+			if(role.equals(role.roleName)) {
+				return role;
+			}
+		}
+		return null;
+	}
 }

@@ -1,5 +1,8 @@
 package com.crawler.schema.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.crawler.schema.web.model.Event;
+import com.crawler.schema.web.model.Role;
 import com.crawler.schema.web.model.UploadRequest;
 import com.crawler.schema.web.model.User;
 import com.crawler.schema.web.model.UserProfile;
@@ -48,6 +52,7 @@ public class ProfileController {
 		String message = "";
 		try {
 			//TODO : save the user do the hex encoding of the password and redirect to login page with a message
+			userService.addUserProfile(profile, getDefaultRoles());
 			message="User profile successfully created! Please login to continue!";
 		}catch (Exception e) {
 			Event event = new Event();
@@ -63,6 +68,12 @@ public class ProfileController {
 		return new ModelAndView("redirect:/home");
 	}
 	
+	private List<Role> getDefaultRoles() {
+		List<Role> roles = new ArrayList<Role>();
+		roles.add(Role.ADMIN);
+		return roles;
+	}
+
 	@RequestMapping(value = "/profile/changePassword", method = RequestMethod.POST)
 	public ModelAndView changePassword(@ModelAttribute User user) {
 		//userService.updatePassword(user);

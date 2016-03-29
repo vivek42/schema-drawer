@@ -1,6 +1,7 @@
 package com.crawler.schema.web.dao.impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.crawler.schema.web.dao.UserDao;
 import com.crawler.schema.web.model.Role;
 import com.crawler.schema.web.model.User;
+import com.crawler.schema.web.model.UserProfile;
 
 public class UserDaoImpl implements UserDao {
 
@@ -37,14 +39,14 @@ public class UserDaoImpl implements UserDao {
 		try {
 			Connection conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement("insert into user values(?, ?, ?, ?)");
-			ps.setInt(1, user.getUserId());
+			ps.setLong(1, user.getUserId());
 			ps.setString(2, user.getUsername());
 			ps.setString(3, user.getPassword());
 			ps.setString(4, (user.isActive() ? "ACTIVE":"INACTIVE"));
 			ps.executeUpdate();
 			for(Role role : user.getRoles()){
-				ps = conn.prepareStatement("insert into userandroles values(?, ?");
-				ps.setInt(1, user.getUserId());
+				ps = conn.prepareStatement("insert into usersandroles values(?, ?)");
+				ps.setLong(1, user.getUserId());
 				ps.setInt(2, role.getRoleId());
 				ps.executeUpdate();
 			}
@@ -62,14 +64,14 @@ public class UserDaoImpl implements UserDao {
 			ps.setString(1, user.getUsername());
 			ps.setString(2, user.getPassword());
 			ps.setString(3, (user.isActive() ? "ACTIVE" : "INACTIVE"));
-			ps.setInt(4, user.getUserId());
+			ps.setLong(4, user.getUserId());
 			ps.executeUpdate();
 			ps = conn.prepareStatement("delete from userandroles where user_id = ?");
-			ps.setInt(1, user.getUserId());
+			ps.setLong(1, user.getUserId());
 			ps.executeUpdate();
 			for(Role role : user.getRoles()){
 				ps = conn.prepareStatement("insert into userandroles values(?, ?");
-				ps.setInt(1, user.getUserId());
+				ps.setLong(1, user.getUserId());
 				ps.setInt(2, role.getRoleId());
 				ps.executeUpdate();
 			}
@@ -84,10 +86,10 @@ public class UserDaoImpl implements UserDao {
 		try {
 			Connection conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement("delete from userandroles where user_id = ?");
-			ps.setInt(1, user.getUserId());
+			ps.setLong(1, user.getUserId());
 			ps.executeUpdate();
 			ps = conn.prepareStatement("delete from user where user_id = ?");
-			ps.setInt(1, user.getUserId());
+			ps.setLong(1, user.getUserId());
 			ps.executeUpdate();
 			ps.close();
 		} catch (SQLException e) {
@@ -115,9 +117,7 @@ public class UserDaoImpl implements UserDao {
 					+ "join role r on ur.role_id = r.role_id where user_id=?");
 			rs = ps.executeQuery();
 			while(rs.next()){
-				Role role = new Role();
-				role.setRoleId(rs.getInt("role_id"));
-				role.setRoleName(rs.getString("roleName"));
+				Role role = Role.getRoleByName(rs.getString("roleName"));
 				user.getRoles().add(role);
 			}
 			ps.close();
@@ -145,12 +145,10 @@ public class UserDaoImpl implements UserDao {
 			}
 			ps = conn.prepareStatement("select ur.*, r.rolename as rolename from usersandroles ur "
 					+ "join role r on ur.role_id = r.role_id where user_id=?");
-			ps.setInt(1, user.getUserId());
+			ps.setLong(1, user.getUserId());
 			rs = ps.executeQuery();
 			while(rs.next()){
-				Role role = new Role();
-				role.setRoleId(rs.getInt("role_id"));
-				role.setRoleName(rs.getString("rolename"));
+				Role role = Role.getRoleByName(rs.getString("rolename"));
 				user.getRoles().add(role);
 			}
 			ps.close();
@@ -181,6 +179,25 @@ public class UserDaoImpl implements UserDao {
 			e.printStackTrace();
 		}
 		return allUsers;
+	}
+
+	@Override
+	public void persistUserProfile(UserProfile userProfile) {
+		try{
+			Connection conn = dataSource.getConnection();
+			PreparedStatement ps = conn.prepareStatement("insert into user_profile(user_id, firstname, lastname, email, dob, gender) values(?, ?, ?, ?, ?, ?)");
+			ps.setLong(1, userProfile.getId());
+			ps.setString(2, userProfile.getFirstName());
+			ps.setString(3, userProfile.getLastName());
+			ps.setString(4, userProfile.getEmailAddress());
+			ps.setDate(5, new java.sql.Date(userProfile.getDob().getTime()));
+			ps.setString(6, userProfile.getGender());
+			ps.executeUpdate();
+			ps.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+			
 	}
 	
 }

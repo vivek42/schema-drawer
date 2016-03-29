@@ -3,6 +3,7 @@ package com.crawler.schema.web.model;
 import java.util.Date;
 
 public class UserProfile {
+	Long id;
 	String username;
 	String password;
 	String emailAddress;
@@ -51,6 +52,12 @@ public class UserProfile {
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+	public void setId(Long userId) {
+		this.id = userId;
+	}
+	public Long getId() {
+		return id;
 	}
 	
 	
