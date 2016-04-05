@@ -4,19 +4,15 @@ $(document)
 
 					//$("#date").datepicker();
 
-					// modify default settings for validation
 					jQuery.validator
 							.setDefaults({
-								// where to display the error relative to the
-								// element
 								errorPlacement : function(error, element) {
 									error.appendTo(element.parent().find(
 											'div.error'));
 								}
 							});
 
-					// custom validation method to make sure the date is in
-					// mm/dd/yyyy format
+					// custom validation methods 
 					jQuery.validator.addMethod("usaDate", function(value,
 							element) {
 						var date = getDateFromFormat(value, 'MM/dd/yyyy');
@@ -25,24 +21,26 @@ $(document)
 						}
 						return true;
 					}, "Please enter a date in the format mm/dd/yyyy");
+					
+					jQuery.validator.addMethod("confirmPassword",function(value,
+							element){
+						if($("#rpassword").val() != value) {
+							return false;
+						}
+						return true;
+					}, "Password and Re-entered value do not match");
 
 					$("#profileCreation")
 							.validate({
 										rules : {
-
 											username : "required",
 											firstName : "required",
 											lastName : "required",
 											password : {
 												required : true,
 												minlength : 8,
-												maxlength : 15
-											},
-											rpassword : {
-												required : true,
-												equalTo : "#password",
-												minlength : 8,
-												maxlength : 15
+												maxlength : 15,
+												confirmPassword :true
 											},
 
 											emailAddress : {
