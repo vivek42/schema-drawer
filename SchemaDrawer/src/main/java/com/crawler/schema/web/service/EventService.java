@@ -6,15 +6,16 @@ import com.crawler.schema.web.model.Event;
 public class EventService {
 	
 	private EventDao eventDao;
+	private OidService oidService;
 	
-	public EventService(EventDao eventDao){
+	public EventService(EventDao eventDao, OidService oidService){
 		this.eventDao = eventDao;
+		this.oidService = oidService;
 	}
 
 	public void logEvent(Event event) {
+		event.setEventId(oidService.getOid());
 		eventDao.logEvent(event);
-		// TODO Auto-generated method stub
-		
 	}
 
 }

@@ -10,6 +10,16 @@ public class Event {
 	String message;
 	String stackTrack;
 	String applicationName;
+	
+	public Event() {
+	}
+	
+	public Event(String eventCode, Exception e) {
+		this.eventCode = eventCode;
+		this.message = e.getMessage();
+		this.stackTrack = e.getStackTrace().toString();
+	}
+	
 	public Long getEventId() {
 		return eventId;
 	}

@@ -1,7 +1,5 @@
 package com.crawler.schema.web.service;
 
-import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -13,11 +11,13 @@ public class TestEventService extends Mockito {
 	
 	EventService objectUnderTest;
 	EventDao mockEventDao;
+	OidService mockOidService;
 
 	@Before
 	public void setup() {
 		mockEventDao = mock(EventDao.class);
-		objectUnderTest = new EventService(mockEventDao);
+		mockOidService = mock(OidService.class);
+		objectUnderTest = new EventService(mockEventDao, mockOidService);
 	}
 	
 	@Test

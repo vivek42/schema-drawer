@@ -56,11 +56,7 @@ public class HomeController {
 			uploadService.upload(uploadRequest, uploadContent);
 			message = "upload Successful!";
 		}catch(Exception e){
-			Event event = new Event();
-			event.setEventId(oidService.getOid());
-			event.setEventCode(this.getClass().getName() + ".submitUploadContect");
-			event.setMessage(e.getMessage());
-			event.setStackTrack(e.getStackTrace().toString());
+			Event event = new Event(this.getClass().getName() + ".submitUploadContect",e);
 			eventService.logEvent(event);
 			message = "we have encountered an error";
 		}

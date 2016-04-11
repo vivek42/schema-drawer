@@ -1,7 +1,5 @@
 package com.crawler.schema.web.service.impl;
 
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -32,14 +30,9 @@ public class UserServiceImpl implements UserService {
 		user.setRoles(roles);
 		user.setUsername(userProfile.getUsername());
 		user.setPassword(encryptPassword(userProfile.getPassword()));
-		addUser(user);
+		userDao.addUser(user);
 		userProfile.setId(userId);
 		userDao.persistUserProfile(userProfile);
-	}
-
-	@Override
-	public void addUser(User user) {
-		userDao.addUser(user);
 	}
 
 	@Override
@@ -55,7 +48,7 @@ public class UserServiceImpl implements UserService {
 		this.userDao = userDao;
 	}
 	
-	private String encryptPassword(String input) throws NoSuchAlgorithmException{
+	protected String encryptPassword(String input) throws NoSuchAlgorithmException{
 		// TODO: Message digest is not thread safe, make it thread safe
 		MessageDigest md = MessageDigest.getInstance("MD5");
         md.update(input.getBytes());

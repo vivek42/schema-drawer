@@ -31,7 +31,7 @@ public class AppConfig {
 	
 	@Bean
 	public EventService getEventService(){
-		return new EventService(new EventDao(getDataSource()));
+		return new EventService(new EventDao(getDataSource()),getOidService());
 	}
 	
 	@Bean

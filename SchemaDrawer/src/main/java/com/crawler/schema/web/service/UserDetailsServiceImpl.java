@@ -24,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userService.findUserByName(username);
+		User user = getUserService().findUserByName(username);
 		if(user!= null){
 			String password = user.getPassword();
 			
@@ -47,6 +47,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		}else {
 			throw new UsernameNotFoundException("User cannot be found!!!");
 		}
+	}
+
+	// For Unit testing purposes
+	protected UserService getUserService() {
+		return userService;
 	}
 
 }
