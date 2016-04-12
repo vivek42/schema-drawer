@@ -3,8 +3,6 @@ package com.crawler.schema.web;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.crawler.schema.web.model.Event;
 import com.crawler.schema.web.model.Role;
-import com.crawler.schema.web.model.UploadRequest;
 import com.crawler.schema.web.model.User;
 import com.crawler.schema.web.model.UserProfile;
 import com.crawler.schema.web.service.EventService;
@@ -55,11 +52,7 @@ public class ProfileController {
 			userService.addUserProfile(profile, getDefaultRoles());
 			message="User profile successfully created! Please login to continue!";
 		}catch (Exception e) {
-			Event event = new Event();
-			event.setEventId(oidService.getOid());
-			event.setEventCode(this.getClass().getName() + ".submitUploadContect");
-			event.setMessage(e.getMessage());
-			event.setStackTrack(e.getStackTrace().toString());
+			Event event = new Event(this.getClass().getName() + ".submitProfilePage",e);
 			eventService.logEvent(event);
 			message = "we have encountered an error";
 		}
@@ -73,11 +66,4 @@ public class ProfileController {
 		roles.add(Role.ADMIN);
 		return roles;
 	}
-
-	@RequestMapping(value = "/profile/changePassword", method = RequestMethod.POST)
-	public ModelAndView changePassword(@ModelAttribute User user) {
-		//userService.updatePassword(user);
-		return new ModelAndView("redirect:/login");
-	}
-	
 }
