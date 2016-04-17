@@ -140,7 +140,7 @@ public class UserDaoImpl implements UserDao {
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()){
 				user.setActive("ACTIVE".equals(rs.getString("status")));
-				user.setUserId(rs.getInt("user_id"));
+				user.setUserId(rs.getLong("user_id"));
 				user.setPassword(rs.getString("password"));
 			}
 			ps = conn.prepareStatement("select ur.*, r.rolename as rolename from usersandroles ur "
@@ -169,7 +169,7 @@ public class UserDaoImpl implements UserDao {
 				User user = new User();
 				user.setUsername(rs.getString("username"));
 				user.setActive("ACTIVE".equals(rs.getString("status")));
-				user.setUserId(rs.getInt("user_id"));
+				user.setUserId(rs.getLong("user_id"));
 				user.setPassword(rs.getString("password"));
 				allUsers.add(user);
 				// TODO: populate the roles for user

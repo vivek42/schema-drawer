@@ -3,16 +3,51 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
+<meta charset="utf-8">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+ 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+ 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<title>Schema Drawer</title>
+	<style>
+		#headerRow {
+			background-color: #79776E;
+			color: white;
+		}
+	</style> 
 </head>
 <body>
-  <div class="row-fluid">
-    Hello <b><c:out value="${pageContext.request.remoteUser}"/></b>
-    <c:url var="logoutUrl" value="/logout"/>
-    <form class="form-inline" action="${logoutUrl}" method="post">
-      <input type="submit" value="Log out" />
-      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    </form>
-  </div>
+  <c:url var="logoutUrl" value="/logout"/>
+	<div id="headerRow" class="row">
+		<div class="col-sm-1">
+		</div>
+		<div class="col-sm-8" align="left">
+			<h4>
+				Hello <b><c:out value="${pageContext.request.remoteUser}" /></b>
+			</h4>
+		</div>
+		<div class="col-sm-3" align="center">
+			<form class="form-inline" action="${logoutUrl}" method="post">
+				<input type="submit" class="btn btn-default" value="Log out" /> <input
+					type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			</form>
+		</div>
+	</div>
+
+	<nav id="headerNav" class="navbar navbar-default">
+	<div class="container-fluid">
+	  <div class="navbar-header">
+	    <a class="navbar-brand" href="#">Schema Drawer</a>
+	  </div>
+	  <ul class="nav navbar-nav">
+	    <li class="active"><a href="/schema/home">Home</a></li>
+	    <li><a href="#">Profile</a></li>
+	    <li><a href="#aboutUs" data-toggle="collapse">About Us</a>
+	  </ul>
+	</div>
+	<div id="aboutUs" class="collapse">
+		Schema Drawer helps you visualize the database by drawing E-R diagrams using create sql scripts.
+	</div>
+</nav>
 </body>
 </html>

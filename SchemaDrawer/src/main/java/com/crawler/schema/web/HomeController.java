@@ -1,6 +1,8 @@
 package com.crawler.schema.web;
 
+import java.security.Principal;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.crawler.schema.web.model.Event;
 import com.crawler.schema.web.model.UploadRequest;
+import com.crawler.schema.web.model.UploadRow;
 import com.crawler.schema.web.service.EventService;
 import com.crawler.schema.web.service.OidService;
 import com.crawler.schema.web.service.UploadService;
@@ -41,19 +44,22 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/admin/upload", method = RequestMethod.GET)
-	public ModelAndView home(Model model) {
+	public ModelAndView home(Model model, Principal principal) {
 		model.addAttribute("uploadRequest", new UploadRequest());
+		model.addAttribute("uploadHistory", uploadService.getUploadHistoryForUsername(principal.getName()));
 		return new ModelAndView("home");
 	}
 	
+
 	@RequestMapping(value = "/admin/upload", method = RequestMethod.POST)
-	public ModelAndView submitUploadContent(@ModelAttribute UploadRequest uploadRequest, HttpServletRequest request){
+	public ModelAndView submitUploadContent(@ModelAttribute UploadRequest uploadRequest, HttpServletRequest request, Principal principal){
 		String message;
 		try{
 			uploadRequest.setUploadId(oidService.getOid());
+			uploadRequest.setFileName(uploadRequest.getUploadContentFile().getOriginalFilename());
 			uploadRequest.setUploadTime(new Date());
 			byte[] uploadContent = uploadRequest.getUploadContentFile().getBytes();
-			uploadService.upload(uploadRequest, uploadContent);
+			uploadService.upload(uploadRequest, uploadContent, principal.getName(), oidService.getOid());
 			message = "upload Successful!";
 		}catch(Exception e){
 			Event event = new Event(this.getClass().getName() + ".submitUploadContect",e);
@@ -62,7 +68,7 @@ public class HomeController {
 		}
 		// TODO : add request object and service for inserting the uploaded content
 		request.setAttribute("message", message);
-		return new ModelAndView("home");
+		return new ModelAndView("redirect:/admin/upload");
 	}
 	
 }

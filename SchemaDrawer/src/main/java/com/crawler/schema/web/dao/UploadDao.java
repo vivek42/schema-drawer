@@ -4,20 +4,33 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.crawler.schema.web.model.UploadRequest;
+import com.crawler.schema.web.model.UploadRow;
 
 public class UploadDao {
 	
 	public static final String INSERT_UPLOAD = "insert into uploads (upload_id, content, upload_time, file_name)"
 														  + "values (?,?,?,?)";
 	
-    private DataSource dataSource;
+    public static final String INSERT_UPLOAD_USER_XREF = "insert into user_upload_xref (id, upload_id, user_id)"
+    		+ " values(?, ?, (select user_id from user where username = ?))";
+    
+    public static final String SELECT_UPLOADS_BY_USER = "select u.file_name, u.upload_time from uploads u "
+    		+ "join user_upload_xref x on u.upload_id = x.upload_id "
+    		+ "join user ur on ur.user_id = x.user_id "
+    		+ "where ur.username = ? "
+    		+ "order by upload_time desc";
+	
+	private DataSource dataSource;
 
     @Autowired
     public UploadDao(DataSource dataSource) {
@@ -25,26 +38,53 @@ public class UploadDao {
         
     }
 
-	public void upload(UploadRequest uploadRequest, byte[] uploadContent) {
+	public void upload(UploadRequest uploadRequest, byte[] uploadContent, String username, Long uploadUserXrefId) {
 		try {
-			
 			Connection conn = dataSource.getConnection();
 			// Converting byte[] into input stream
 			InputStream uploadStream = new ByteArrayInputStream(uploadContent);
-			
-			
 			PreparedStatement ps = conn.prepareStatement(INSERT_UPLOAD);
-			ps.setInt(1, uploadRequest.getUploadId().intValue());
+			ps.setLong(1, uploadRequest.getUploadId());
 			ps.setBinaryStream(2, uploadStream);
 			java.util.Date currentDate = new java.util.Date();
 			ps.setTimestamp(3, new Timestamp(currentDate.getTime()));
 			ps.setString(4, uploadRequest.getFileName());
 			ps.executeUpdate();
 			ps.close();
+			
+			ps = conn.prepareStatement(INSERT_UPLOAD_USER_XREF);
+			ps.setLong(1, uploadUserXrefId);
+			ps.setLong(2, uploadRequest.getUploadId());
+			ps.setString(3, username);
+			ps.executeUpdate();
+			ps.close();
 		
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+
+	public List<UploadRow> getUploadHistoryForUsername(String username) {
+		List<UploadRow> uploadHistory = new ArrayList<UploadRow>();
+		Long counter = 1L;
+		try {
+			Connection conn = dataSource.getConnection();
+			PreparedStatement ps = conn.prepareStatement(SELECT_UPLOADS_BY_USER);
+			ps.setString(1, username);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				UploadRow row = new UploadRow();
+				row.setSerialNumber(counter);
+				row.setFileName(rs.getString("file_name"));
+				row.setUploadTime(rs.getTimestamp("upload_time"));
+				uploadHistory.add(row);
+				counter++;
+			}
+			ps.close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return uploadHistory;
 	}
 
 }

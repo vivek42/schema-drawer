@@ -3,6 +3,7 @@ package com.crawler.schema.web;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.sql.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,8 +53,11 @@ public class TestHomeController extends Mockito {
 	@Test
 	public void testHome() {
 		Model testModel = mock(Model.class);
-		ModelAndView answer = objectUnderTest.home(testModel);
-		verify(testModel, times(1)).addAttribute(any(String.class), any(Object.class));
+		Principal testp = mock(Principal.class);
+		when(testp.getName()).thenReturn("testUsername");
+		when(mockUploadService.getUploadHistoryForUsername(eq("testUsername"))).thenReturn(null);
+		ModelAndView answer = objectUnderTest.home(testModel, testp);
+		verify(testModel, times(2)).addAttribute(any(String.class), any(Object.class));
 		assertEquals("home", answer.getViewName());
 	}
 	
@@ -61,16 +65,18 @@ public class TestHomeController extends Mockito {
 	public void testSubmitUploadContent_happyPath() throws IOException {
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);
 		UploadRequest mockUploadRequest = mock(UploadRequest.class);
+		Principal principal = mock(Principal.class);
+		when(principal.getName()).thenReturn("testUsername");
 		when(mockOidService.getOid()).thenReturn(123L);
 		doNothing().when(mockUploadRequest).setUploadId(any(Long.class));
 		doNothing().when(mockUploadRequest).setUploadTime(any(Date.class));
 		when(mockUploadRequest.getUploadContentFile()).thenReturn(mockFile);
 		when(mockFile.getBytes()).thenReturn(new byte[5]);
-		doNothing().when(mockUploadService).upload(any(UploadRequest.class), any(byte[].class));
+		doNothing().when(mockUploadService).upload(any(UploadRequest.class), any(byte[].class), any(String.class), any(Long.class));
 		doNothing().when(mockRequest).setAttribute(any(String.class), any(String.class));
-		ModelAndView answer = objectUnderTest.submitUploadContent(mockUploadRequest, mockRequest);
+		ModelAndView answer = objectUnderTest.submitUploadContent(mockUploadRequest, mockRequest, null);
 		
-		assertEquals("home", answer.getViewName());
+		assertEquals("redirect:/admin/upload", answer.getViewName());
 	}
 	
 	@Test
@@ -78,8 +84,8 @@ public class TestHomeController extends Mockito {
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);
 		UploadRequest mockUploadRequest = mock(UploadRequest.class);
 		when(mockOidService.getOid()).thenThrow(new NullPointerException());
-		ModelAndView answer = objectUnderTest.submitUploadContent(mockUploadRequest, mockRequest);
+		ModelAndView answer = objectUnderTest.submitUploadContent(mockUploadRequest, mockRequest, null);
 		verify(mockEventService, times(1)).logEvent(any(Event.class));
-		assertEquals("home", answer.getViewName());
+		assertEquals("redirect:/admin/upload", answer.getViewName());
 	}
 }

@@ -13,18 +13,12 @@ public enum Role {
 	public int getRoleId() {
 		return roleId;
 	}
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
-	}
 	public String getRoleName() {
 		return roleName;
 	}
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
 	public static Role getRoleByName(String roleName) {
 		for (Role role : values()) {
-			if(role.equals(role.roleName)) {
+			if(role.getRoleName().equals(roleName)) {
 				return role;
 			}
 		}
