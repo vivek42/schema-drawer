@@ -5,8 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,18 +16,18 @@ public class EventDao {
 	public static final String INSERT_EVENT = "insert into events (EVENT_ID, EVENT_CODE,EVENT_TIME, MESSAGE, STACK_TRACE, APPLICATION_NAME) "
 														+ "values (?, ?, ?, ?, ?,?)";
 
-	private DataSource dataSource;
+	private Connection connection;
 
     @Autowired
-    public EventDao(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public EventDao(Connection connection) {
+        this.connection = connection;
     }
 
     
     public void logEvent(Event event) {
     	Connection conn = null;
 		try{
-			conn = dataSource.getConnection();
+			conn = connection;
 			PreparedStatement ps = conn.prepareStatement(INSERT_EVENT);
 			ps.setInt(1, event.getEventId().intValue());
 			ps.setString(2, event.getEventCode());

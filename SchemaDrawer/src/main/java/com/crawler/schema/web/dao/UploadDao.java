@@ -30,17 +30,17 @@ public class UploadDao {
     		+ "where ur.username = ? "
     		+ "order by upload_time desc";
 	
-	private DataSource dataSource;
+	private Connection connection;
 
     @Autowired
-    public UploadDao(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public UploadDao(Connection connection) {
+        this.connection = connection;
         
     }
 
 	public void upload(UploadRequest uploadRequest, byte[] uploadContent, String username, Long uploadUserXrefId) {
 		try {
-			Connection conn = dataSource.getConnection();
+			Connection conn = connection;
 			// Converting byte[] into input stream
 			InputStream uploadStream = new ByteArrayInputStream(uploadContent);
 			PreparedStatement ps = conn.prepareStatement(INSERT_UPLOAD);
@@ -68,7 +68,7 @@ public class UploadDao {
 		List<UploadRow> uploadHistory = new ArrayList<UploadRow>();
 		Long counter = 1L;
 		try {
-			Connection conn = dataSource.getConnection();
+			Connection conn = connection;
 			PreparedStatement ps = conn.prepareStatement(SELECT_UPLOADS_BY_USER);
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();

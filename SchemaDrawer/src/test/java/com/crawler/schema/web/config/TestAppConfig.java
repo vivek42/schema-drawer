@@ -26,7 +26,7 @@ public class TestAppConfig {
 		assertNotNull(objectUnderTest.getUserService());
 		assertNotNull(objectUnderTest.getEventService());
 		assertNotNull(objectUnderTest.getOidService());
-		assertNotNull(objectUnderTest.getDataSource());
+		assertNotNull(objectUnderTest.getConnection());
 		assertNotNull(objectUnderTest.getCommonsMultipartResolver());
 	}
 

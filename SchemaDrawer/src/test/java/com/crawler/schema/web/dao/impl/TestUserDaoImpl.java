@@ -1,6 +1,6 @@
 package com.crawler.schema.web.dao.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,8 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.sql.DataSource;
 
 import org.junit.After;
 import org.junit.Before;
@@ -23,7 +21,6 @@ import com.crawler.schema.web.model.UserProfile;
 
 public class TestUserDaoImpl extends Mockito {
 
-	DataSource mockDataSource;
 	Connection mockConnection;
 	PreparedStatement mockPreparedStatement;
 	
@@ -31,12 +28,10 @@ public class TestUserDaoImpl extends Mockito {
 	
 	@Before
 	public void setup() throws SQLException {
-		mockDataSource = mock(DataSource.class);
 		mockConnection = mock(Connection.class);
 		mockPreparedStatement = mock(PreparedStatement.class);
-		when(mockDataSource.getConnection()).thenReturn(mockConnection);
 		when(mockConnection.prepareStatement(any(String.class))).thenReturn(mockPreparedStatement);
-		objectUnderTest = new UserDaoImpl(mockDataSource);
+		objectUnderTest = new UserDaoImpl(mockConnection);
 	}
 	
 	private User createTestUser() {

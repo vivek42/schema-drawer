@@ -1,10 +1,9 @@
 package com.crawler.schema.web.config;
 
-import javax.sql.DataSource;
+import java.sql.Connection;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.crawler.schema.web.dao.EventDao;
@@ -21,17 +20,17 @@ public class AppConfig {
 
 	@Bean
 	public UploadService getUploadService(){
-		return new UploadService(new UploadDao(getDataSource()));
+		return new UploadService(new UploadDao(getConnection()));
 	}
 	
 	@Bean
 	public UserServiceImpl getUserService() {
-		return new UserServiceImpl(new UserDaoImpl(getDataSource()), getOidService());
+		return new UserServiceImpl(new UserDaoImpl(getConnection()), getOidService());
 	}
 	
 	@Bean
 	public EventService getEventService(){
-		return new EventService(new EventDao(getDataSource()),getOidService());
+		return new EventService(new EventDao(getConnection()),getOidService());
 	}
 	
 	@Bean
@@ -40,10 +39,11 @@ public class AppConfig {
 	}
 	
 	@Bean
-    public DataSource getDataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("org.sqlite.JDBC");
-		dataSource.setUrl("jdbc:sqlite:/Users/vivekchouhan/sqliteDb/schemaDrawer.db");
+    public Connection getConnection() {
+		Connection conn = DBConnection.getInstance().openConnection();
+//		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//		dataSource.setDriverClassName("org.sqlite.JDBC");
+//		dataSource.setUrl("jdbc:sqlite:/Users/vivekchouhan/sqliteDb/schemaDrawer.db");
 		
 //        DriverManagerDataSource dataSource = new DriverManagerDataSource();
 //        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
@@ -51,7 +51,7 @@ public class AppConfig {
 //        dataSource.setUsername("vivek");
 //        dataSource.setPassword("P@ssword");
          
-        return dataSource;
+        return conn;
     }
 	
 	@Bean(name="multipartResolver")

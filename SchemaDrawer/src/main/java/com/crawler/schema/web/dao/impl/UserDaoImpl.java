@@ -1,14 +1,11 @@
 package com.crawler.schema.web.dao.impl;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,25 +16,25 @@ import com.crawler.schema.web.model.UserProfile;
 
 public class UserDaoImpl implements UserDao {
 
-	private DataSource dataSource;
+	private Connection connection;
 	
     @Autowired
-    public UserDaoImpl(DataSource dataSource) {
-        this.setDataSource(dataSource);
+    public UserDaoImpl(Connection connection) {
+        this.setConnection(connection);
     }
 
-	public DataSource getDataSource() {
-		return dataSource;
+	public Connection getConnection() {
+		return connection;
 	}
 
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
+	public void setConnection(Connection connection) {
+		this.connection = connection;
 	}
 
 	@Override
 	public void addUser(User user) {
 		try {
-			Connection conn = dataSource.getConnection();
+			Connection conn = connection;
 			PreparedStatement ps = conn.prepareStatement("insert into user values(?, ?, ?, ?)");
 			ps.setLong(1, user.getUserId());
 			ps.setString(2, user.getUsername());
@@ -59,7 +56,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void editUser(User user) {
 		try {
-			Connection conn = dataSource.getConnection();
+			Connection conn = connection;
 			PreparedStatement ps = conn.prepareStatement("update user set username=?, password=?, status=? where user_id=?");
 			ps.setString(1, user.getUsername());
 			ps.setString(2, user.getPassword());
@@ -84,7 +81,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void deleteUser(User user) {
 		try {
-			Connection conn = dataSource.getConnection();
+			Connection conn = connection;
 			PreparedStatement ps = conn.prepareStatement("delete from userandroles where user_id = ?");
 			ps.setLong(1, user.getUserId());
 			ps.executeUpdate();
@@ -104,7 +101,7 @@ public class UserDaoImpl implements UserDao {
 		List<Role> roles = new ArrayList<Role>();
 		user.setRoles(roles);
 		try {
-			Connection conn = dataSource.getConnection();
+			Connection conn = connection;
 			PreparedStatement ps = conn.prepareStatement("select * from user where user_id=?");
 			ps.setInt(1, userId);
 			ResultSet rs = ps.executeQuery();
@@ -134,7 +131,7 @@ public class UserDaoImpl implements UserDao {
 		List<Role> roles = new ArrayList<Role>();
 		user.setRoles(roles);
 		try {
-			Connection conn = dataSource.getConnection();
+			Connection conn = connection;
 			PreparedStatement ps = conn.prepareStatement("select * from user where username=?");
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
@@ -162,7 +159,7 @@ public class UserDaoImpl implements UserDao {
 	public List<User> getAllUsers() {
 		List<User> allUsers = new ArrayList<User>();
 		try {
-			Connection conn = dataSource.getConnection();
+			Connection conn = connection;
 			PreparedStatement ps = conn.prepareStatement("select * from user");
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
@@ -184,7 +181,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void persistUserProfile(UserProfile userProfile) {
 		try{
-			Connection conn = dataSource.getConnection();
+			Connection conn = connection;
 			PreparedStatement ps = conn.prepareStatement("insert into user_profile(user_id, firstname, lastname, email, dob, gender) values(?, ?, ?, ?, ?, ?)");
 			ps.setLong(1, userProfile.getId());
 			ps.setString(2, userProfile.getFirstName());
