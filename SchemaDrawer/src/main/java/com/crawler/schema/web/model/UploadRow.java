@@ -6,6 +6,8 @@ public class UploadRow {
 	Long serialNumber;
 	String fileName;
 	Timestamp uploadTime;
+	boolean needsDownload = false;
+	boolean needsSchemaGeneration = false;
 	public Long getSerialNumber() {
 		return serialNumber;
 	}
@@ -23,6 +25,18 @@ public class UploadRow {
 	}
 	public void setUploadTime(Timestamp uploadTime) {
 		this.uploadTime = uploadTime;
+	}
+	public boolean needsDownload() {
+		return needsDownload;
+	}
+	public void setNeedsDownload(boolean needsDownload) {
+		this.needsDownload = needsDownload;
+	}
+	public boolean needsSchemaGeneration() {
+		return needsSchemaGeneration;
+	}
+	public void setNeedsSchemaGeneration(boolean needsSchemaGeneration) {
+		this.needsSchemaGeneration = needsSchemaGeneration;
 	}
 
 }

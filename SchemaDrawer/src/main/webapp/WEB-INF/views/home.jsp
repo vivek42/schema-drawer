@@ -23,7 +23,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading"><h4>Upload Box</h4></div>
 				<div class="panel-body">
-				<form:form id="uploadRequestForm" action="/schema/admin/upload" commandName="uploadRequest" method="post" enctype="multipart/form-data">
+				<form:form id="uploadRequestForm" action="/schema/admin/upload" modalAttribute="uploadRequest" method="post" enctype="multipart/form-data">
 					<div class="row">
 						<div class="col-sm-6"><form:input class="btn btn-info" type="file" value="select File" path="uploadContentFile"/></div>
 						<div class="col-sm-6" align="center"><input class="btn btn-default" type="submit" value="Upload"/></div>
