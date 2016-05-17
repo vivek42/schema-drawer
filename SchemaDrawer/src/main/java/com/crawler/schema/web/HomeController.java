@@ -1,12 +1,16 @@
 package com.crawler.schema.web;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,6 +51,7 @@ public class HomeController {
 	public ModelAndView home(Model model, Principal principal) {
 		model.addAttribute("uploadRequest", new UploadRequest());
 		model.addAttribute("uploadHistory", uploadService.getUploadHistoryForUsername(principal.getName()));
+		model.addAttribute("uploadRow", new UploadRow());
 		return new ModelAndView("home");
 	}
 	
@@ -69,6 +74,19 @@ public class HomeController {
 		// TODO : add request object and service for inserting the uploaded content
 		request.setAttribute("message", message);
 		return new ModelAndView("redirect:/admin/upload");
+	}
+	
+	@RequestMapping(value="/download/file", method = RequestMethod.POST)
+	public void fileDownload(@ModelAttribute UploadRow uploadRow,HttpServletRequest request, HttpServletResponse response,Principal principal) throws IOException {
+		InputStream in = uploadService.getDownloadStreamForFile(uploadRow, principal.getName());
+		try {
+			response.setContentType("application/octet-stream");
+			response.setHeader("Content-Disposition","attachment;filename=" + uploadRow.getFileName());
+			//response.setContentType("image/jpeg");
+			IOUtils.copy(in, response.getOutputStream());
+		} finally {
+			IOUtils.closeQuietly(in);
+		}
 	}
 	
 }

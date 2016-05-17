@@ -2,6 +2,7 @@ package com.crawler.schema.web.dao;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,6 +30,12 @@ public class UploadDao {
     		+ "join user ur on ur.user_id = x.user_id "
     		+ "where ur.username = ? "
     		+ "order by upload_time desc";
+    
+    public static final String SELECT_UPLOAD_CONTENT = "select u.content from uploads u "
+    		+ "join user_upload_xref x on u.upload_id = x.upload_id "
+    		+ "join user ur on ur.user_id = x.user_id "
+    		+ "where ur.username = ? "
+    		+ " and u.file_name = ? ";
 	
 	private Connection connection;
 
@@ -85,6 +92,25 @@ public class UploadDao {
 			e.printStackTrace();
 		}
 		return uploadHistory;
+	}
+
+	public InputStream getDownloadStreamForFile(UploadRow row, String username) {
+		InputStream stream = null;
+		try {
+			Connection conn = connection;
+			PreparedStatement ps = conn.prepareStatement(SELECT_UPLOAD_CONTENT);
+			ps.setString(1, username);
+			ps.setString(2, row.getFileName());
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				stream = rs.getBinaryStream("content");
+			}
+			ps.close();
+			return stream;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return stream;
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.crawler.schema.web.service;
 
+import java.io.InputStream;
 import java.util.List;
 
 import com.crawler.schema.web.dao.UploadDao;
@@ -20,5 +21,9 @@ public class UploadService {
 
 	public List<UploadRow> getUploadHistoryForUsername(String username) {
 		return uploadDao.getUploadHistoryForUsername(username);
+	}
+	
+	public InputStream getDownloadStreamForFile(UploadRow row,String username){
+		return uploadDao.getDownloadStreamForFile(row,username);
 	}
 }

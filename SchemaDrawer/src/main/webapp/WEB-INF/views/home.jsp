@@ -56,7 +56,14 @@
 					<td><c:out value="${upload.serialNumber}"></c:out></td>
 					<td><c:out value="${upload.fileName}"></c:out></td>
 					<td><fmt:formatDate type="both" value="${upload.uploadTime}" /></td>
-					<td><input type="submit" class="btn btn-default" value="Download" data-toggle="modal" data-target="#notAvailable"/></td>
+					<td><form:form action="/schema/download/file" commandName="uploadRow" method="post">
+						<form:input type="hidden" value="${upload.serialNumber}" path="serialNumber"/>
+						<form:input type="hidden" value="${upload.fileName }" path="fileName"/>
+						<form:input type="hidden" value="${upload.uploadTime }" path="uploadTime"/>
+						<input type="submit" class="btn btn-default" value="Download" />
+<!-- 						<input type="submit" class="btn btn-default" value="Download" data-toggle="modal" data-target="#notAvailable"/> -->
+					    </form:form>
+					</td>
 					<td><input type="submit" class="btn btn-default" value="Generate Diagram" data-toggle="modal" data-target="#notAvailable"/></td>
 				</tr>
 			</c:forEach>
