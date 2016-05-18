@@ -196,5 +196,17 @@ public class UserDaoImpl implements UserDao {
 		}
 			
 	}
+
+	@Override
+	public UserProfile getUserProfileByName(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateUserProfile(UserProfile profile) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

@@ -1,5 +1,6 @@
 package com.crawler.schema.web;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,5 +66,18 @@ public class ProfileController {
 		List<Role> roles = new ArrayList<Role>();
 		roles.add(Role.ADMIN);
 		return roles;
+	}
+	
+	@RequestMapping(value = "/profile/edit", method=RequestMethod.GET)
+	public ModelAndView getProfilePage(Model model, Principal principal) {
+		UserProfile profile = userService.getUserProfileByName(principal.getName());
+		model.addAttribute("profile", (profile==null ? new UserProfile() : profile));
+		return new ModelAndView("profile");
+	}
+	
+	@RequestMapping(value="/profile/edit", method=RequestMethod.POST)
+	public ModelAndView updateProfilePage(@ModelAttribute UserProfile profile, BindingResult result) {
+		userService.updateUserProfile(profile);
+		return new ModelAndView("redirect:/profile/edit");
 	}
 }

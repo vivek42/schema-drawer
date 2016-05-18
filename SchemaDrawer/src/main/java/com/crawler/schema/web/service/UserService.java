@@ -10,6 +10,8 @@ import com.crawler.schema.web.model.UserProfile;
 public interface UserService {
 
 	User findUserByName(String username);
+	UserProfile getUserProfileByName(String username);
 	void addUserProfile(UserProfile userProfile, List<Role> roles)
 			throws NoSuchAlgorithmException;
+	void updateUserProfile(UserProfile profile);
 }

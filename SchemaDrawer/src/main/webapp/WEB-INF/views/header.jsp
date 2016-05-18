@@ -40,8 +40,16 @@
 	    <a class="navbar-brand" href="#">Schema Drawer</a>
 	  </div>
 	  <ul class="nav navbar-nav">
-	    <li class="active"><a href="/schema/home">Home</a></li>
-	    <li><a href="#">Profile</a></li>
+	  	<c:choose>
+	  		<c:when test="${param.currentPage != null && param.currentPage=='profile' }">
+			    <li><a href="/schema/home">Home</a></li>
+			    <li class="active"><a href="/schema/profile/edit">Profile</a></li>
+	  		</c:when>
+	  		<c:otherwise>
+			    <li class="active"><a href="/schema/home">Home</a></li>
+			    <li><a href="/schema/profile/edit">Profile</a></li>
+	  		</c:otherwise>
+	  	</c:choose>
 	    <li><a href="#aboutUs" data-toggle="collapse">About Us</a>
 	  </ul>
 	</div>

@@ -64,4 +64,14 @@ public class UserServiceImpl implements UserService {
     	return hexString.toString();
 	}
 
+	@Override
+	public UserProfile getUserProfileByName(String username) {
+		return userDao.getUserProfileByName(username);
+	}
+
+	@Override
+	public void updateUserProfile(UserProfile profile) {
+		userDao.updateUserProfile(profile);
+	}
+
 }

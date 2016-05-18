@@ -2,15 +2,12 @@ package com.crawler.schema.web.dao;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -35,7 +32,8 @@ public class UploadDao {
     		+ "join user_upload_xref x on u.upload_id = x.upload_id "
     		+ "join user ur on ur.user_id = x.user_id "
     		+ "where ur.username = ? "
-    		+ " and u.file_name = ? ";
+    		+ " and u.file_name = ? "
+    		+ " and u.upload_time = ? ";
 	
 	private Connection connection;
 
@@ -49,10 +47,10 @@ public class UploadDao {
 		try {
 			Connection conn = connection;
 			// Converting byte[] into input stream
-			InputStream uploadStream = new ByteArrayInputStream(uploadContent);
+			//InputStream uploadStream = new ByteArrayInputStream(uploadContent);
 			PreparedStatement ps = conn.prepareStatement(INSERT_UPLOAD);
 			ps.setLong(1, uploadRequest.getUploadId());
-			ps.setBinaryStream(2, uploadStream);
+			ps.setBytes(2, uploadContent);
 			java.util.Date currentDate = new java.util.Date();
 			ps.setTimestamp(3, new Timestamp(currentDate.getTime()));
 			ps.setString(4, uploadRequest.getFileName());
@@ -101,6 +99,7 @@ public class UploadDao {
 			PreparedStatement ps = conn.prepareStatement(SELECT_UPLOAD_CONTENT);
 			ps.setString(1, username);
 			ps.setString(2, row.getFileName());
+			ps.setTimestamp(3, row.getUploadTime());
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()){
 				stream = rs.getBinaryStream("content");
@@ -110,7 +109,7 @@ public class UploadDao {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		stream = new ByteArrayInputStream("".getBytes());
 		return stream;
 	}
-
 }

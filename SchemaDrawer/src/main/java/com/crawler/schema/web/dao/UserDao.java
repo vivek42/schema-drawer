@@ -13,4 +13,6 @@ public interface UserDao {
 	User findUserByName(String username);
 	List<User> getAllUsers();
 	void persistUserProfile(UserProfile userProfile);
+	UserProfile getUserProfileByName(String username);
+	void updateUserProfile(UserProfile profile);
 }
