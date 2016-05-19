@@ -14,6 +14,9 @@
 			background-color: #79776E;
 			color: white;
 		}
+		.btn{
+			margin-top: 10px;
+		}
 	</style> 
 </head>
 <body>
@@ -23,7 +26,7 @@
 		</div>
 		<div class="col-sm-8" align="left">
 			<h4>
-				Hello <b><c:out value="${pageContext.request.remoteUser}" /></b>
+				Hi, <b><c:out value="${pageContext.request.remoteUser}" /></b>
 			</h4>
 		</div>
 		<div class="col-sm-3" align="center">
@@ -41,13 +44,13 @@
 	  </div>
 	  <ul class="nav navbar-nav">
 	  	<c:choose>
-	  		<c:when test="${param.currentPage != null && param.currentPage=='profile' }">
-			    <li><a href="/schema/home">Home</a></li>
-			    <li class="active"><a href="/schema/profile/edit">Profile</a></li>
-	  		</c:when>
-	  		<c:otherwise>
+	  		<c:when test="${param.currentPage=='home' }">
 			    <li class="active"><a href="/schema/home">Home</a></li>
 			    <li><a href="/schema/profile/edit">Profile</a></li>
+	  		</c:when>
+	  		<c:otherwise>
+			    <li><a href="/schema/home">Home</a></li>
+			    <li class="active"><a href="/schema/profile/edit">Profile</a></li>
 	  		</c:otherwise>
 	  	</c:choose>
 	    <li><a href="#aboutUs" data-toggle="collapse">About Us</a>

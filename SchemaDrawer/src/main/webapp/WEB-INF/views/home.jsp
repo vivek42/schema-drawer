@@ -4,13 +4,16 @@
 <%@ page session="false" %>
 <html>
 <jsp:include page="header.jsp">
-	<jsp:param value="currentPage" name="home"/>
+	<jsp:param value="home" name="currentPage"/>
 </jsp:include>
 <head>
 	<title>Home</title>
 	<style>
 		#backColor {
 			background-color: #DDD;
+		}
+		.container{
+			background-color: #F5F5F5;
 		}
 	</style>
 </head>
@@ -19,7 +22,7 @@
 	<p>${message}</p><br/>
 	<c:remove var="message"/>
 </c:if>
-<div class="container">
+<div class="container well-sm">
 	<div class="row">
 		<div class="col-sm-6">
 			<div class="panel panel-default">
@@ -40,9 +43,10 @@
 		<div class="col-sm-6"></div>
 	</div>
 </div>
-<div class="container">
+<br/>
+<div class="container well-lg">
 	<h4>Upload History</h4>
-	<table class="table table-striped">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>Serial No.</th>

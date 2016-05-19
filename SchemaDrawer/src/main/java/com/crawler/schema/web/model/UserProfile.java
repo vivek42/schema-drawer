@@ -10,6 +10,7 @@ public class UserProfile {
 	String firstName;
 	String lastName;
 	Date dob;
+	String dobShow;
 	String gender;
 	public String getUsername() {
 		return username;
@@ -43,6 +44,15 @@ public class UserProfile {
 	}
 	public Date getDob() {
 		return dob;
+	}
+	public String getDobShow() {
+		if(dob !=null && dob.toString().indexOf(":") >= 2){
+			return dob.toString().substring(0, (dob.toString().indexOf(":")-2));
+		}else if(dob == null){
+			return null;
+		}else {
+			return dob.toString();
+		}
 	}
 	public void setDob(Date dob) {
 		this.dob = dob;

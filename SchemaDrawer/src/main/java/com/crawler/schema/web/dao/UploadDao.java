@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -94,8 +95,8 @@ public class UploadDao {
 
 	public InputStream getDownloadStreamForFile(UploadRow row, String username) {
 		InputStream stream = null;
+		Connection conn = connection;
 		try {
-			Connection conn = connection;
 			PreparedStatement ps = conn.prepareStatement(SELECT_UPLOAD_CONTENT);
 			ps.setString(1, username);
 			ps.setString(2, row.getFileName());
@@ -112,4 +113,5 @@ public class UploadDao {
 		stream = new ByteArrayInputStream("".getBytes());
 		return stream;
 	}
+	
 }
