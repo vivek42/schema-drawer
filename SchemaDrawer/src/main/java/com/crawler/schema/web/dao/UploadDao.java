@@ -57,6 +57,7 @@ public class UploadDao {
 			ps.setString(4, uploadRequest.getFileName());
 			ps.executeUpdate();
 			ps.close();
+			// TODO: make the commit transactional
 			
 			ps = conn.prepareStatement(INSERT_UPLOAD_USER_XREF);
 			ps.setLong(1, uploadUserXrefId);
