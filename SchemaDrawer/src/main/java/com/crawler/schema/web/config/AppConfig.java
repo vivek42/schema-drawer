@@ -40,7 +40,7 @@ public class AppConfig {
 	
 	@Bean
     public Connection getConnection() {
-		Connection conn = DBConnection.getInstance().openConnection();
+		Connection conn = DBConnectionPool.getInstance().openConnection();
 //		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 //		dataSource.setDriverClassName("org.sqlite.JDBC");
 //		dataSource.setUrl("jdbc:sqlite:/Users/vivekchouhan/sqliteDb/schemaDrawer.db");

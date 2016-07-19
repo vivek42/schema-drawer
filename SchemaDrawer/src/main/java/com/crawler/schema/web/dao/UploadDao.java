@@ -5,13 +5,13 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.crawler.schema.web.config.DBConnectionPool;
 import com.crawler.schema.web.model.UploadRequest;
 import com.crawler.schema.web.model.UploadRow;
 
@@ -36,17 +36,15 @@ public class UploadDao {
     		+ " and u.file_name = ? "
     		+ " and u.upload_time = ? ";
 	
-	private Connection connection;
-
     @Autowired
     public UploadDao(Connection connection) {
-        this.connection = connection;
-        
+        //this.connection = connection;
     }
 
 	public void upload(UploadRequest uploadRequest, byte[] uploadContent, String username, Long uploadUserXrefId) {
-		try {
-			Connection conn = connection;
+		try (Connection conn = DBConnectionPool.getInstance().openConnection())
+		{
+			//Connection conn = connection;
 			// Converting byte[] into input stream
 			//InputStream uploadStream = new ByteArrayInputStream(uploadContent);
 			PreparedStatement ps = conn.prepareStatement(INSERT_UPLOAD);
@@ -56,8 +54,8 @@ public class UploadDao {
 			ps.setTimestamp(3, new Timestamp(currentDate.getTime()));
 			ps.setString(4, uploadRequest.getFileName());
 			ps.executeUpdate();
+			conn.commit();
 			ps.close();
-			// TODO: make the commit transactional
 			
 			ps = conn.prepareStatement(INSERT_UPLOAD_USER_XREF);
 			ps.setLong(1, uploadUserXrefId);
@@ -65,7 +63,7 @@ public class UploadDao {
 			ps.setString(3, username);
 			ps.executeUpdate();
 			ps.close();
-		
+			conn.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -74,8 +72,7 @@ public class UploadDao {
 	public List<UploadRow> getUploadHistoryForUsername(String username) {
 		List<UploadRow> uploadHistory = new ArrayList<UploadRow>();
 		Long counter = 1L;
-		try {
-			Connection conn = connection;
+		try (Connection conn = DBConnectionPool.getInstance().openConnection()){
 			PreparedStatement ps = conn.prepareStatement(SELECT_UPLOADS_BY_USER);
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
@@ -87,7 +84,10 @@ public class UploadDao {
 				uploadHistory.add(row);
 				counter++;
 			}
+			conn.commit();
+			rs.close();
 			ps.close();
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -96,8 +96,8 @@ public class UploadDao {
 
 	public InputStream getDownloadStreamForFile(UploadRow row, String username) {
 		InputStream stream = null;
-		Connection conn = connection;
-		try {
+		try (Connection conn = DBConnectionPool.getInstance().openConnection())
+		{
 			PreparedStatement ps = conn.prepareStatement(SELECT_UPLOAD_CONTENT);
 			ps.setString(1, username);
 			ps.setString(2, row.getFileName());
@@ -106,6 +106,7 @@ public class UploadDao {
 			if(rs.next()){
 				stream = rs.getBinaryStream("content");
 			}
+			rs.close();
 			ps.close();
 			return stream;
 		}catch (Exception e) {

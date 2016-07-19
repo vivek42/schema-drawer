@@ -9,14 +9,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.crawler.schema.web.config.DBConnection;
-import com.crawler.schema.web.dao.BaseDao;
+import com.crawler.schema.web.config.DBConnectionPool;
 import com.crawler.schema.web.dao.UserDao;
 import com.crawler.schema.web.model.Role;
 import com.crawler.schema.web.model.User;
 import com.crawler.schema.web.model.UserProfile;
 
-public class UserDaoImpl extends BaseDao implements UserDao {
+public class UserDaoImpl implements UserDao {
 
     @Autowired
     public UserDaoImpl(Connection connection) {
@@ -24,8 +23,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
 	@Override
 	public void addUser(User user) {
-		try {
-			Connection conn = getConnection();
+		try (Connection conn = DBConnectionPool.getInstance().openConnection())
+		{
 			PreparedStatement ps = conn.prepareStatement("insert into user values(?, ?, ?, ?)");
 			ps.setLong(1, user.getUserId());
 			ps.setString(2, user.getUsername());
@@ -38,19 +37,16 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 				ps.setInt(2, role.getRoleId());
 				ps.executeUpdate();
 			}
+			conn.commit();
 			ps.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
-			commitConnection();
-			closeConnection();
 		}
 	}
 
 	@Override
 	public void editUser(User user) {
-		try {
-			Connection conn = getConnection();
+		try (Connection conn = DBConnectionPool.getInstance().openConnection()){
 			PreparedStatement ps = conn.prepareStatement("update user set username=?, password=?, status=? where user_id=?");
 			ps.setString(1, user.getUsername());
 			ps.setString(2, user.getPassword());
@@ -66,31 +62,27 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 				ps.setInt(2, role.getRoleId());
 				ps.executeUpdate();
 			}
+			conn.commit();
 			ps.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
-			commitConnection();
-			closeConnection();
 		}
 	}
 
 	@Override
 	public void deleteUser(User user) {
-		try {
-			Connection conn = getConnection();
+		try (Connection conn = DBConnectionPool.getInstance().openConnection())
+		{
 			PreparedStatement ps = conn.prepareStatement("delete from userandroles where user_id = ?");
 			ps.setLong(1, user.getUserId());
 			ps.executeUpdate();
 			ps = conn.prepareStatement("delete from user where user_id = ?");
 			ps.setLong(1, user.getUserId());
 			ps.executeUpdate();
+			conn.commit();
 			ps.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
-			commitConnection();
-			closeConnection();
 		}
 	}
 
@@ -100,8 +92,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		user.setUserId(userId);
 		List<Role> roles = new ArrayList<Role>();
 		user.setRoles(roles);
-		try {
-			Connection conn = getConnection();
+		try (Connection conn = DBConnectionPool.getInstance().openConnection()){
 			PreparedStatement ps = conn.prepareStatement("select * from user where user_id=?");
 			ps.setInt(1, userId);
 			ResultSet rs = ps.executeQuery();
@@ -117,12 +108,10 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 				Role role = Role.getRoleByName(rs.getString("roleName"));
 				user.getRoles().add(role);
 			}
+			rs.close();
 			ps.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
-			commitConnection();
-			closeConnection();
 		}
 		return user;
 	}
@@ -133,8 +122,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		user.setUsername(username);
 		List<Role> roles = new ArrayList<Role>();
 		user.setRoles(roles);
-		try {
-			Connection conn = getConnection();
+		try (Connection conn = DBConnectionPool.getInstance().openConnection()){
 			PreparedStatement ps = conn.prepareStatement("select * from user where username=?");
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
@@ -151,12 +139,10 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 				Role role = Role.getRoleByName(rs.getString("rolename"));
 				user.getRoles().add(role);
 			}
+			rs.close();
 			ps.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
-			commitConnection();
-			closeConnection();
 		}
 		return user;
 	}
@@ -164,8 +150,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 	@Override
 	public List<User> getAllUsers() {
 		List<User> allUsers = new ArrayList<User>();
-		try {
-			Connection conn = getConnection();
+		try (Connection conn = DBConnectionPool.getInstance().openConnection()){
 			PreparedStatement ps = conn.prepareStatement("select * from user");
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
@@ -177,20 +162,17 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 				allUsers.add(user);
 				// TODO: populate the roles for user
 			}
+			rs.close();
 			ps.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
-			commitConnection();
-			closeConnection();
 		}
 		return allUsers;
 	}
 
 	@Override
 	public void persistUserProfile(UserProfile userProfile) {
-		try{
-			Connection conn = getConnection();
+		try (Connection conn = DBConnectionPool.getInstance().openConnection()){
 			PreparedStatement ps = conn.prepareStatement("insert into user_profile(user_id, firstname, lastname, email, dob, gender) values(?, ?, ?, ?, ?, ?)");
 			ps.setLong(1, userProfile.getId());
 			ps.setString(2, userProfile.getFirstName());
@@ -199,22 +181,18 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 			ps.setDate(5, new java.sql.Date(userProfile.getDob().getTime()));
 			ps.setString(6, userProfile.getGender());
 			ps.executeUpdate();
+			conn.commit();
 			ps.close();
 		}catch(Exception e) {
 			e.printStackTrace();
-		}finally{
-			commitConnection();
-			closeConnection();
 		}
-			
 	}
 
 	@Override
 	public UserProfile getUserProfileByName(String username) {
 		UserProfile profile = new UserProfile();
 		profile.setUsername(username);
-		try{
-			Connection conn = getConnection();
+		try (Connection conn = DBConnectionPool.getInstance().openConnection()){
 			PreparedStatement ps = conn.prepareStatement("select p.* from user_profile p join user u on u.user_id = p.user_id where u.username = ?");
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
@@ -227,20 +205,17 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 			}else{
 				throw new Exception("Profile not found! for username <" + username + ">");
 			}
+			rs.close();
 			ps.close();
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally{
-			commitConnection();
-			closeConnection();
 		}
 		return profile;
 	}
 
 	@Override
 	public void updateUserProfile(UserProfile profile) {
-		try{
-			Connection conn = getConnection();
+		try (Connection conn = DBConnectionPool.getInstance().openConnection()){
 			PreparedStatement ps = conn.prepareStatement("update user_profile set firstname=?, lastname=?, email=?, gender=? where user_id in (select user_id from user where username = ?)");
 			ps.setString(1, profile.getFirstName());
 			ps.setString(2, profile.getLastName());
@@ -248,12 +223,10 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 			ps.setString(4, profile.getGender());
 			ps.setString(5, profile.getUsername());
 			ps.executeUpdate();
+			conn.commit();
 			ps.close();
 		}catch(Exception e) {
 			e.printStackTrace();
-		}finally{
-			commitConnection();
-			closeConnection();
 		}
 	}
 }

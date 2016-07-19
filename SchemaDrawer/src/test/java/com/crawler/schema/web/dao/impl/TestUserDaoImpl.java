@@ -125,6 +125,8 @@ public class TestUserDaoImpl extends Mockito {
 		tstUserProfile.setGender("male");
 		objectUnderTest.persistUserProfile(tstUserProfile);
 		verify(mockPreparedStatement, times(1)).executeUpdate();
+		
+		List<String> test = new ArrayList<>();
 	}
 	
 	@After

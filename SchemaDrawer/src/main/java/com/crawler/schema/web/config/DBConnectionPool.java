@@ -5,14 +5,13 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-public class DBConnection {
+public class DBConnectionPool {
 	
-	private static DBConnection dbConnectionSingleton = null;
-    private static Connection conn = null;
+	private static DBConnectionPool dbConnectionSingleton = null;
     private boolean flag = true;
  
     /** A private Constructor prevents any other class from instantiating. */
-    private DBConnection() {
+    private DBConnectionPool() {
         try {
             Class.forName("org.sqlite.JDBC").newInstance();
         } 
@@ -31,24 +30,25 @@ public class DBConnection {
     }
      
     public Connection openConnection() {
-        if (conn == null) {
-            try {
-            	DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        		dataSource.setDriverClassName("org.sqlite.JDBC");
-        		dataSource.setUrl("jdbc:sqlite:/Users/vivekchouhan/sqliteDb/schemaDrawer.db");
-                conn = dataSource.getConnection();
-            } 
-            catch (SQLException e) {
-                flag = false;
-            }
+    	Connection conn;
+        try {
+        	DriverManagerDataSource dataSource = new DriverManagerDataSource();
+    		dataSource.setDriverClassName("org.sqlite.JDBC");
+    		dataSource.setUrl("jdbc:sqlite:/Users/vivekchouhan/sqliteDb/schemaDrawer.db");
+            conn = dataSource.getConnection();
+            conn.setAutoCommit(false);
+            return conn;
+        } 
+        catch (SQLException e) {
+            flag = false;
         }
-        return conn;
+        return null;
     }
  
     /** Static 'instance' method */
-    public static DBConnection getInstance() {
+    public static DBConnectionPool getInstance() {
         if (dbConnectionSingleton == null) {
-            dbConnectionSingleton = new DBConnection();
+            dbConnectionSingleton = new DBConnectionPool();
         }
         return dbConnectionSingleton;
     }

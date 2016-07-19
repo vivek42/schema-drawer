@@ -3,7 +3,7 @@ package com.crawler.schema.web.dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import com.crawler.schema.web.config.DBConnection;
+import com.crawler.schema.web.config.DBConnectionPool;
 
 public class BaseDao {
 	
@@ -12,7 +12,7 @@ public class BaseDao {
 	public Connection getConnection(){
 		try{
 			if(conn == null || conn.isClosed()){
-				return DBConnection.getInstance().openConnection();
+				return DBConnectionPool.getInstance().openConnection();
 			}
 		}catch(Exception e){
 			e.printStackTrace();
