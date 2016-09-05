@@ -115,5 +115,26 @@ public class UploadDao {
 		stream = new ByteArrayInputStream("".getBytes());
 		return stream;
 	}
+
+	public String getUploadContentByRow(UploadRow row, String username) {
+		String content = "";
+		try (Connection conn = DBConnectionPool.getInstance().openConnection())
+		{
+			PreparedStatement ps = conn.prepareStatement(SELECT_UPLOAD_CONTENT);
+			ps.setString(1, username);
+			ps.setString(2, row.getFileName());
+			ps.setTimestamp(3, row.getUploadTime());
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				content = rs.getString("content");
+			}
+			rs.close();
+			ps.close();
+			return content;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return content;
+	}
 	
 }

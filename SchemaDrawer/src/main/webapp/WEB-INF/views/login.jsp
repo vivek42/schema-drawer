@@ -47,7 +47,7 @@
       <div class="modal-footer">
 		<input class="btn btn-default"type="submit" value="login" />
        	<table>
-	   		<tr><td>First time users-</td><td><a href="/schema/profile/create">Register here!</a></td></tr>
+	   		<tr><td>First time users-</td><td><a href="/SchemaDrawer/profile/create">Register here!</a></td></tr>
 	 	</table>
       </div>
 	</form>

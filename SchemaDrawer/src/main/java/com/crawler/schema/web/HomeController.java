@@ -89,4 +89,16 @@ public class HomeController {
 		}
 	}
 	
+	@RequestMapping(value="/download/diagram", method = RequestMethod.POST) 
+	public void diagramDownload(@ModelAttribute UploadRow uploadRow, HttpServletRequest request, HttpServletResponse response,Principal principal) throws IOException {
+		InputStream in = uploadService.getDownloadStreamForDiagram(uploadRow, principal.getName());
+		try {
+			response.setContentType("image/jpeg");
+			//response.setContentType("application/octet-stream");
+			response.setHeader("Content-Disposition","attachment;filename=" + uploadRow.getFileName() + "jpg");
+			IOUtils.copy(in, response.getOutputStream());
+		} finally {
+			IOUtils.closeQuietly(in);
+		}
+	}
 }
