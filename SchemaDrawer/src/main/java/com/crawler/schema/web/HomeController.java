@@ -93,12 +93,22 @@ public class HomeController {
 	public void diagramDownload(@ModelAttribute UploadRow uploadRow, HttpServletRequest request, HttpServletResponse response,Principal principal) throws IOException {
 		InputStream in = uploadService.getDownloadStreamForDiagram(uploadRow, principal.getName());
 		try {
-			response.setContentType("image/jpeg");
-			//response.setContentType("application/octet-stream");
-			response.setHeader("Content-Disposition","attachment;filename=" + uploadRow.getFileName() + "jpg");
+			//response.setContentType("image/jpeg");
+			response.setContentType("application/octet-stream");
+			response.setHeader("Content-Disposition","attachment;filename=" + uploadRow.getFileName() + "_output.html");
 			IOUtils.copy(in, response.getOutputStream());
 		} finally {
 			IOUtils.closeQuietly(in);
+		}
+	}
+	
+	@RequestMapping(value="/guest", method = RequestMethod.GET)
+	public ModelAndView guestHome(Model model, Principal principal) {
+		if(principal == null) {
+			return new ModelAndView("redirect:/admin/upload");
+		} else {
+			model.addAttribute("uploadRequest", new UploadRequest());
+			return new ModelAndView("guest");
 		}
 	}
 }
