@@ -45,12 +45,12 @@
 	  <ul class="nav navbar-nav">
 	  	<c:choose>
 	  		<c:when test="${param.currentPage=='home' }">
-			    <li class="active"><a href="/schema/home">Home</a></li>
-			    <li><a href="/schema/profile/edit">Profile</a></li>
+			    <li class="active"><a href="/ui/home">Home</a></li>
+			    <li><a href="/ui/profile/edit">Profile</a></li>
 	  		</c:when>
 	  		<c:otherwise>
-			    <li><a href="/schema/home">Home</a></li>
-			    <li class="active"><a href="/schema/profile/edit">Profile</a></li>
+			    <li><a href="/ui/home">Home</a></li>
+			    <li class="active"><a href="/ui/profile/edit">Profile</a></li>
 	  		</c:otherwise>
 	  	</c:choose>
 	    <li><a href="#aboutUs" data-toggle="collapse">About Us</a>

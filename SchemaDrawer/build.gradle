@@ -33,6 +33,7 @@ dependencies {
     compile(group: 'org.springframework', name: 'spring-context', version:'3.1.1.RELEASE') {
 		exclude(module: 'commons-logging')
     }
+    compile group: 'us.fatehi', name: 'schemacrawler', version: '14.09.03'
     compile group: 'org.springframework', name: 'spring-webmvc', version:'3.1.1.RELEASE'
     compile group: 'org.springframework.security', name: 'spring-security-core', version:'3.1.1.RELEASE'
     compile group: 'org.springframework.security', name: 'spring-security-web', version:'3.1.1.RELEASE'
@@ -65,7 +66,7 @@ dependencies {
 
 gretty {
   port = 30018
-  contextPath = 'SchemaDrawer'
+  contextPath = 'ui'
   servletContainer = 'tomcat8' //tomcat7 or tomcat8
 }
 

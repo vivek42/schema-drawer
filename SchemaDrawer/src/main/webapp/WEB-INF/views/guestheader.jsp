@@ -30,10 +30,9 @@
 			</h4>
 		</div>
 		<div class="col-sm-3" align="center">
-			<input class="btn btn-default"type="submit" value="login" />
-	       	<table>
-		   		<tr><td><a href="/SchemaDrawer/login">Go to login page</a></td></tr>
-		 	</table>
+			<div class="btn btn-default">
+				<a href="/ui/login">Go to login page</a>
+			</div>
 		</div>
 	</div>
 </body>

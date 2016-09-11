@@ -1,13 +1,8 @@
 package com.crawler.schema.web.model;
 
-import static us.fatehi.commandlineparser.CommandLineUtility.applyApplicationLogLevel;
-import static us.fatehi.commandlineparser.CommandLineUtility.logSystemProperties;
-
-import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
-import java.util.logging.Level;
 
 import schemacrawler.schemacrawler.ExcludeAll;
 import schemacrawler.schemacrawler.IncludeAll;
@@ -22,9 +17,9 @@ public class SchemaCrawlerUtility {
 
 	public static Path runSchemaCrawler(Connection conn, String outputFileName) throws Exception {
 		// Set logging on
-	    applyApplicationLogLevel(Level.ALL);
+//	    applyApplicationLogLevel(Level.ALL);
 	    // Log system properties and classpath
-	    logSystemProperties();
+//	    logSystemProperties();
 
 	    // Create the options
 	    final SchemaCrawlerOptions options = new SchemaCrawlerOptions();

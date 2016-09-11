@@ -8,6 +8,7 @@
 	<http use-expressions="true">
 		<form-login login-page="/login" default-target-url="/home" authentication-failure-url="/login"/>
 		<intercept-url pattern="/signup*" access="permitAll"/>
+		<intercept-url pattern="/guest*" access="permitAll"/>
 		<intercept-url pattern="/admin/**" access="hasRole('admin')" />
 		<logout logout-url="/logout" logout-success-url="/home"/>
 	</http>

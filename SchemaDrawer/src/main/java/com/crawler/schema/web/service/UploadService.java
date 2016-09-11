@@ -3,6 +3,7 @@ package com.crawler.schema.web.service;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -54,18 +55,7 @@ public class UploadService {
 			writer.write(content);
 			writer.close();
 			
-			// step 2 : make a db connection from the file
-			DriverManagerDataSource dataSource = new DriverManagerDataSource();
-    		dataSource.setDriverClassName("org.sqlite.JDBC");
-    		dataSource.setUrl("jdbc:sqlite:" + dbFile.getAbsolutePath());
-    		
-    		// step 3 : run SchemaCrawler on the database
-    		String outputFileName = username + ":" + row.getFileName() + "_output.html";
-    		Path outputFilePath = SchemaCrawlerUtility.runSchemaCrawler(dataSource.getConnection(), outputFileName);
-    		
-			// step 4 : add file to the outgoing stream.
-    		InputStream stream = new FileInputStream(outputFilePath.toFile());
-			return stream;
+			return generateOutputFromFile(username, dbFile);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -81,5 +71,21 @@ public class UploadService {
 		}
 		
 		return null;
+	}
+
+	public InputStream generateOutputFromFile(String username, File dbFile) throws Exception{
+		// step 2 : make a db connection from the file
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName("org.sqlite.JDBC");
+		dataSource.setUrl("jdbc:sqlite:" + dbFile.getAbsolutePath());
+		
+		// step 3 : run SchemaCrawler on the database
+		String uname = (username==null || username.trim().isEmpty() ? "" : username + ":");
+		String outputFileName = uname + dbFile.getName() + "_output.html";
+		Path outputFilePath = SchemaCrawlerUtility.runSchemaCrawler(dataSource.getConnection(), outputFileName);
+		
+		// step 4 : add file to the outgoing stream.
+		InputStream stream = new FileInputStream(outputFilePath.toFile());
+		return stream;
 	}
 }

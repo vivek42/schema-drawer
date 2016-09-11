@@ -1,5 +1,6 @@
 package com.crawler.schema.web;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.Principal;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +32,8 @@ import com.crawler.schema.web.service.UploadService;
 @Controller
 @SessionAttributes("uploadRequest")
 public class HomeController {
+	
+	private static Logger LOGGER = Logger.getLogger(HomeController.class);
 	
 	protected UploadService uploadService;
 	protected EventService eventService;
@@ -104,11 +108,29 @@ public class HomeController {
 	
 	@RequestMapping(value="/guest", method = RequestMethod.GET)
 	public ModelAndView guestHome(Model model, Principal principal) {
-		if(principal == null) {
+		if(principal != null) {
 			return new ModelAndView("redirect:/admin/upload");
 		} else {
 			model.addAttribute("uploadRequest", new UploadRequest());
 			return new ModelAndView("guest");
+		}
+	}
+	
+	@RequestMapping(value="/guest", method = RequestMethod.POST)
+	public void guestDiagramDownload(@ModelAttribute UploadRequest uploadRequest, HttpServletRequest request, HttpServletResponse response,Principal principal) {
+		File dbFile = new File(uploadRequest.getUploadContentFile().getOriginalFilename());
+		InputStream in = null ;
+		try {
+			uploadRequest.getUploadContentFile().transferTo(dbFile);
+			in = uploadService.generateOutputFromFile("", dbFile);
+			//response.setContentType("image/jpeg");
+			response.setContentType("application/octet-stream");
+			response.setHeader("Content-Disposition","attachment;filename=" + dbFile.getName() + "_output.html");
+			IOUtils.copy(in, response.getOutputStream());
+		} catch (Exception e) {
+			LOGGER.info("Unable to generate diagram for file : <" + dbFile.getName() + ">");;
+		} finally {
+			IOUtils.closeQuietly(in);
 		}
 	}
 }
