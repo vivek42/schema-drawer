@@ -26,7 +26,7 @@
 	<div class="row">
 		<div class="col-sm-6">
 			<div class="panel panel-default">
-				<div class="panel-heading"><h4>Upload Box</h4></div>
+				<div class="panel-heading"><h4>Upload Box (Only accepts sqlite db file)</h4></div>
 				<div class="panel-body">
 				<form:form id="uploadRequestForm" action="/ui/guest" commandName="uploadRequest" method="post" enctype="multipart/form-data">
 					<div class="row">

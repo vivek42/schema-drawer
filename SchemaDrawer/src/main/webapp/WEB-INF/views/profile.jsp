@@ -72,7 +72,7 @@
 			<div class="modal-header">
 				<h2 align="center" class="modal-title">Update Personal Details</h2>
 			</div>
-			<form:form id="profileUpdateForm" action="/schema/profile/edit"
+			<form:form id="profileUpdateForm" action="/profile/edit"
 				commandName="profile" method="POST">
 				<div class="modal-body">
 					<table class="table table-hover">

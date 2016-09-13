@@ -1,6 +1,9 @@
 package com.crawler.schema.web;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.Principal;
@@ -33,6 +36,9 @@ import com.crawler.schema.web.service.UploadService;
 @SessionAttributes("uploadRequest")
 public class HomeController {
 	
+	private static final String MESSAGE_FOR_ERROR_IN_READING_DATABASE = "An error occured while connecting with the database."
+			+ "Please check the sqlite database file and try again";
+
 	private static Logger LOGGER = Logger.getLogger(HomeController.class);
 	
 	protected UploadService uploadService;
@@ -75,7 +81,6 @@ public class HomeController {
 			eventService.logEvent(event);
 			message = "we have encountered an error";
 		}
-		// TODO : add request object and service for inserting the uploaded content
 		request.setAttribute("message", message);
 		return new ModelAndView("redirect:/admin/upload");
 	}
@@ -88,7 +93,9 @@ public class HomeController {
 			response.setHeader("Content-Disposition","attachment;filename=" + uploadRow.getFileName());
 			//response.setContentType("image/jpeg");
 			IOUtils.copy(in, response.getOutputStream());
-		} finally {
+		} catch (Exception e) {
+			in = handleDownloadDiagramError(uploadRow.getFileName());
+		}finally {
 			IOUtils.closeQuietly(in);
 		}
 	}
@@ -101,7 +108,10 @@ public class HomeController {
 			response.setContentType("application/octet-stream");
 			response.setHeader("Content-Disposition","attachment;filename=" + uploadRow.getFileName() + "_output.html");
 			IOUtils.copy(in, response.getOutputStream());
-		} finally {
+		} catch (Exception e) {
+			in = handleDownloadDiagramError(uploadRow.getFileName());
+		}
+		finally {
 			IOUtils.closeQuietly(in);
 		}
 	}
@@ -128,9 +138,24 @@ public class HomeController {
 			response.setHeader("Content-Disposition","attachment;filename=" + dbFile.getName() + "_output.html");
 			IOUtils.copy(in, response.getOutputStream());
 		} catch (Exception e) {
-			LOGGER.info("Unable to generate diagram for file : <" + dbFile.getName() + ">");;
+			in = handleDownloadDiagramError(dbFile.getName());
 		} finally {
 			IOUtils.closeQuietly(in);
 		}
+	}
+
+	protected InputStream handleDownloadDiagramError(String fileName) {
+		InputStream in = null;
+		LOGGER.info("Unable to generate diagram for file : <" + fileName + ">");
+		try {
+			File errorFile = File.createTempFile(fileName + "_output.html", "");
+			BufferedWriter writer = new BufferedWriter(new FileWriter(errorFile));
+			writer.write(MESSAGE_FOR_ERROR_IN_READING_DATABASE);
+			writer.close();
+			in = new FileInputStream(errorFile);
+		} catch (IOException e1) {
+			LOGGER.info("Unable to create a tmp file : <" + fileName + ">");
+		}
+		return in;
 	}
 }
