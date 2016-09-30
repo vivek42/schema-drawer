@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.Principal;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -88,33 +87,16 @@ public class HomeController {
 	@RequestMapping(value="/download/file", method = RequestMethod.POST)
 	public void fileDownload(@ModelAttribute UploadRow uploadRow,HttpServletRequest request, HttpServletResponse response,Principal principal) throws IOException {
 		InputStream in = uploadService.getDownloadStreamForFile(uploadRow, principal.getName());
-		try {
-			response.setContentType("application/octet-stream");
-			response.setHeader("Content-Disposition","attachment;filename=" + uploadRow.getFileName());
-			//response.setContentType("image/jpeg");
-			IOUtils.copy(in, response.getOutputStream());
-		} catch (Exception e) {
-			in = handleDownloadDiagramError(uploadRow.getFileName());
-		}finally {
-			IOUtils.closeQuietly(in);
-		}
+		inputStreamToDownload(uploadRow.getFileName(), in, response, "");
 	}
+	
 	
 	@RequestMapping(value="/download/diagram", method = RequestMethod.POST) 
 	public void diagramDownload(@ModelAttribute UploadRow uploadRow, HttpServletRequest request, HttpServletResponse response,Principal principal) throws IOException {
 		InputStream in = uploadService.getDownloadStreamForDiagram(uploadRow, principal.getName());
-		try {
-			//response.setContentType("image/jpeg");
-			response.setContentType("application/octet-stream");
-			response.setHeader("Content-Disposition","attachment;filename=" + uploadRow.getFileName() + "_output.html");
-			IOUtils.copy(in, response.getOutputStream());
-		} catch (Exception e) {
-			in = handleDownloadDiagramError(uploadRow.getFileName());
-		}
-		finally {
-			IOUtils.closeQuietly(in);
-		}
+		inputStreamToDownload(uploadRow.getFileName(), in, response, "_output.html");
 	}
+
 	
 	@RequestMapping(value="/guest", method = RequestMethod.GET)
 	public ModelAndView guestHome(Model model, Principal principal) {
@@ -133,13 +115,27 @@ public class HomeController {
 		try {
 			uploadRequest.getUploadContentFile().transferTo(dbFile);
 			in = uploadService.generateOutputFromFile("", dbFile);
-			//response.setContentType("image/jpeg");
+			inputStreamToDownload(dbFile.getName(), in, response, "_output.html");
+		} catch (Exception e) {
+			LOGGER.info("Unable to generate diagram for file : <" + dbFile.getName() + ">");
+		} 
+	}
+	
+	protected void inputStreamToDownload(String filename, InputStream in, HttpServletResponse response, String fileExtension) throws IOException {
+		try {
 			response.setContentType("application/octet-stream");
-			response.setHeader("Content-Disposition","attachment;filename=" + dbFile.getName() + "_output.html");
+			response.setHeader("Content-Disposition","attachment;filename=" + filename + fileExtension);
+			//response.setContentType("image/jpeg");
 			IOUtils.copy(in, response.getOutputStream());
 		} catch (Exception e) {
-			in = handleDownloadDiagramError(dbFile.getName());
-		} finally {
+			in = handleDownloadDiagramError(filename);
+			try {
+				IOUtils.copy(in, response.getOutputStream());
+			} catch (IOException ioe) {
+				LOGGER.info("IOException while trying to copy the file : <" + filename + "> to output stream");
+				throw ioe;
+			}
+		}finally {
 			IOUtils.closeQuietly(in);
 		}
 	}

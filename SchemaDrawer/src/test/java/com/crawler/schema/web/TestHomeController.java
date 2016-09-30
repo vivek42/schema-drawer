@@ -114,35 +114,61 @@ public class TestHomeController extends Mockito {
 		objectUnderTest.fileDownload(row, mockRequest, mockResponse, user);
 		
 		verify(mockResponse, times(1)).setContentType("application/octet-stream");
-		verify(mockResponse, times(1)).setHeader("Content-Disposition","attachment;filename=" + row.getFileName() + "_output.html");
+		verify(mockResponse, times(1)).setHeader("Content-Disposition","attachment;filename=" + row.getFileName());
 		verify(mockResponse, times(1)).getOutputStream();
 		
 	}
 	
 	@Test
-	public void testFileDownload_Exception() throws IOException {
-		File tmpFile = File.createTempFile("test", "");
-		FileWriter writer = new FileWriter(tmpFile);
-		writer.write("test file content");
-		writer.close();
-		InputStream in = new FileInputStream(tmpFile);
+	public void testDiagramDownload() throws IOException {
+		objectUnderTest = spy(objectUnderTest);
+
+		InputStream in = mock(InputStream.class);
 		UploadRow row = new UploadRow();
 		row.setFileName("testFilename");
 		Principal user = mock(Principal.class);
 		when(user.getName()).thenReturn("testUsername");
-		when(mockUploadService.getDownloadStreamForFile(any(UploadRow.class), any(String.class))).thenReturn(in);
+		when(mockUploadService.getDownloadStreamForDiagram(eq(row), eq("testUsername"))).thenReturn(in);
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);
 		HttpServletResponse mockResponse = mock(HttpServletResponse.class);
-		when(mockResponse.getOutputStream()).thenThrow(new Exception());
+		doNothing().when(objectUnderTest).inputStreamToDownload(any(String.class), any(InputStream.class), eq(mockResponse), any(String.class));		
 		
-		objectUnderTest = spy(objectUnderTest);
-		doNothing().when(objectUnderTest).handleDownloadDiagramError(any(String.class));
+		//doNothing().when(objectUnderTest).inputStreamToDownload(eq("testFilename"), eq(in), eq(mockResponse), eq("_output.html"));		
+		objectUnderTest.diagramDownload(row, mockRequest, mockResponse, user);
 		
-		objectUnderTest.fileDownload(row, mockRequest, mockResponse, user);
+		verify(objectUnderTest, times(1)).inputStreamToDownload(eq("testFilename"), eq(in), eq(mockResponse), eq("_output.html"));
+		verify(mockUploadService, times(1)).getDownloadStreamForDiagram(eq(row), eq("testUsername"));
+	}
+	
+	@Test
+	public void testGuestHome() {
+		Model mockModel = mock(Model.class);
+		Principal mockPrincipal = mock(Principal.class);
 		
+		ModelAndView resultView = objectUnderTest.guestHome(mockModel, null);
+		assertEquals("guest", resultView.getViewName());
+		
+		resultView = objectUnderTest.guestHome(mockModel, mockPrincipal);
+		assertEquals("redirect:/admin/upload", resultView.getViewName());
+	}
+	
+	@Test
+	public void testGuestDiagramDowload() throws IllegalStateException, IOException {
+		MultipartFile mockFile = mock(MultipartFile.class);
+		doNothing().when(mockFile).transferTo(any(File.class));
+		when(mockFile.getOriginalFilename()).thenReturn("testFileName");
+		File tmpFile = File.createTempFile("test", "");
+		FileWriter writer = new FileWriter(tmpFile);
+		writer.write("test file content");
+		writer.close();
+		UploadRequest request = new UploadRequest();
+		request.setUploadContentFile(mockFile);
+		HttpServletResponse mockResponse = mock(HttpServletResponse.class);
+		
+		objectUnderTest.guestDiagramDownload(request, null, mockResponse, null);
 		verify(mockResponse, times(1)).setContentType("application/octet-stream");
-		verify(mockResponse, times(1)).setHeader("Content-Disposition","attachment;filename=" + row.getFileName() + "_output.html");
+		verify(mockResponse, times(1)).setHeader("Content-Disposition","attachment;filename=testFileName_output.html");
 		verify(mockResponse, times(1)).getOutputStream();
-		verify(objectUnderTest, times(1)).handleDownloadDiagramError(any(String.class));
+	
 	}
 }
