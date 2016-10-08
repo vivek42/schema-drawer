@@ -5,10 +5,12 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.crawler.schema.web.config.DBConnectionPool;
@@ -16,6 +18,8 @@ import com.crawler.schema.web.model.UploadRequest;
 import com.crawler.schema.web.model.UploadRow;
 
 public class UploadDao {
+	
+	private static Logger LOGGER = Logger.getLogger(UploadDao.class);
 	
 	public static final String INSERT_UPLOAD = "insert into uploads (upload_id, content, upload_time, file_name)"
 														  + "values (?,?,?,?)";
@@ -65,7 +69,7 @@ public class UploadDao {
 			ps.close();
 			conn.commit();
 		}catch(Exception e){
-			e.printStackTrace();
+			LOGGER.info(e);
 		}
 	}
 
@@ -89,7 +93,7 @@ public class UploadDao {
 			ps.close();
 			
 		}catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.info(e);
 		}
 		return uploadHistory;
 	}
@@ -110,31 +114,34 @@ public class UploadDao {
 			ps.close();
 			return stream;
 		}catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.info(e);
 		}
 		stream = new ByteArrayInputStream("".getBytes());
 		return stream;
 	}
 
-	public String getUploadContentByRow(UploadRow row, String username) {
-		String content = "";
+	public byte[] getUploadContentByRow(UploadRow row, String username) throws SQLException {
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 		try (Connection conn = DBConnectionPool.getInstance().openConnection())
 		{
-			PreparedStatement ps = conn.prepareStatement(SELECT_UPLOAD_CONTENT);
+			ps = conn.prepareStatement(SELECT_UPLOAD_CONTENT);
 			ps.setString(1, username);
 			ps.setString(2, row.getFileName());
 			ps.setTimestamp(3, row.getUploadTime());
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			if(rs.next()){
-				content = rs.getString("content");
+				byte[] content =  rs.getBytes("content");
+				ps.close();
+				rs.close();
+				return content;
 			}
-			rs.close();
-			ps.close();
-			return content;
+			return null;
 		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		return content;
+			LOGGER.info(e);
+		} 
+		return null;
 	}
 	
 }

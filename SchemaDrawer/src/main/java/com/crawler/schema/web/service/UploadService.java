@@ -1,16 +1,15 @@
 package com.crawler.schema.web.service;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import com.crawler.schema.web.dao.UploadDao;
@@ -19,12 +18,12 @@ import com.crawler.schema.web.model.SchemaCrawlerUtility;
 import com.crawler.schema.web.model.UploadRequest;
 import com.crawler.schema.web.model.UploadRow;
 
-import schemacrawler.crawl.SchemaCrawler;
 
 public class UploadService {
 	
 	private UploadDao uploadDao;
-	private SchemaCrawler crawler;
+	
+	private static Logger LOGGER = Logger.getLogger(UploadService.class);
 	
 	public UploadService(UploadDao dao){
 		this.uploadDao = dao;
@@ -45,29 +44,22 @@ public class UploadService {
 	public InputStream getDownloadStreamForDiagram(UploadRow row, String username) {
 		try {
 			// step 1 : get the content of the file and create a db file 
-			String content = uploadDao.getUploadContentByRow(row, username);
+			byte[] content = uploadDao.getUploadContentByRow(row, username);
 			File dbFile = new File(username + ":" + row.getFileName());
 			if(dbFile.exists()) {
 				throw new DatabaseExistException("the db file with name : " + row.getFileName() +
 						"for sqlite already exists for user with username : <" + username);
 			}
-			BufferedWriter writer = new BufferedWriter(new FileWriter(dbFile.getAbsolutePath()));
-			writer.write(content);
-			writer.close();
-			
+			FileUtils.writeByteArrayToFile(dbFile, content);
 			return generateOutputFromFile(username, dbFile);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.info(e);
 		} catch (DatabaseExistException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.info(e);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.info(e);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.info(e);
 		}
 		
 		return null;

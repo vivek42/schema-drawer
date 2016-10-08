@@ -34,7 +34,7 @@ public class DBConnectionPool {
         try {
         	DriverManagerDataSource dataSource = new DriverManagerDataSource();
     		dataSource.setDriverClassName("org.sqlite.JDBC");
-    		dataSource.setUrl("jdbc:sqlite:/home/vivek/schemaDrawerDB/db.db");
+    		dataSource.setUrl("jdbc:sqlite:/home/vivek/schemaDrawerDB/db");
             conn = dataSource.getConnection();
             conn.setAutoCommit(false);
             return conn;
