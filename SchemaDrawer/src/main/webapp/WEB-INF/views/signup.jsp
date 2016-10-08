@@ -31,7 +31,7 @@
 					<h2 align="center" class="modal-title">Please fill the
 						following information</h2>
 				</div>
-				<form:form id="profileCreation" action="/profile/create"
+				<form:form id="profileCreation" action="/ui/profile/create"
 					commandName="profile" method="POST">
 					<div class="modal-body">
 						<table class="table table-hover">

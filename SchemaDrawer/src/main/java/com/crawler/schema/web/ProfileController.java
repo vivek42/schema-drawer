@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +32,9 @@ public class ProfileController {
 	protected EventService eventService;
 	protected OidService oidService;
 	
+	private static Logger LOGGER = Logger.getLogger(ProfileController.class);
+	
+	
 	@Autowired
 	public ProfileController(UserService userService, EventService eventService, OidService oidService) {
 		this.userService = userService;
@@ -57,6 +61,7 @@ public class ProfileController {
 			eventService.logEvent(event);
 			message = "we have encountered an error";
 		}
+		LOGGER.info(message);
 		// TODO : add request object and service for inserting the uploaded content
 		redirectAttrs.addFlashAttribute("message", message);
 		return new ModelAndView("redirect:/home");
