@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,13 +18,18 @@ public class EventDao {
 	public static final String INSERT_EVENT = "insert into events (EVENT_ID, EVENT_CODE,EVENT_TIME, MESSAGE, STACK_TRACE, APPLICATION_NAME) "
 														+ "values (?, ?, ?, ?, ?,?)";
 
-    @Autowired
+	private static Logger LOGGER = Logger.getLogger(EventDao.class);
+	@Autowired
     public EventDao(Connection connection) {
         //this.connection = connection;
     }
+    
+    protected Connection getConnectionForMethod() {
+    	return DBConnectionPool.getInstance().openConnection();
+    }
 
     public void logEvent(Event event) {
-		try (Connection conn = DBConnectionPool.getInstance().openConnection()) 
+		try (Connection conn = getConnectionForMethod()) 
 		{
 			PreparedStatement ps = conn.prepareStatement(INSERT_EVENT);
 			ps.setInt(1, event.getEventId().intValue());
@@ -36,7 +42,7 @@ public class EventDao {
 			conn.commit();
 			ps.close();
 		}catch(Exception e){
-			e.printStackTrace();
+			LOGGER.info(e);
 		}
     }
 }

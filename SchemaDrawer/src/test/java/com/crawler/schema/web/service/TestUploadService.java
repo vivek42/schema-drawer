@@ -2,6 +2,8 @@ package com.crawler.schema.web.service;
 
 import static org.junit.Assert.*;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +40,15 @@ public class TestUploadService extends Mockito{
 		when(mockUploadDao.getUploadHistoryForUsername(eq("testUsername"))).thenReturn(testResult);
 		objectUnderTest.getUploadHistoryForUsername("testUsername");
 		verify(mockUploadDao, times(1)).getUploadHistoryForUsername(eq("testUsername"));
+	}
+	
+	@Test
+	public void testGetDownloadStreamForFile() {
+		InputStream stream = new ByteArrayInputStream("".getBytes());
+		when(mockUploadDao.getDownloadStreamForFile(any(UploadRow.class), any(String.class))).thenReturn(stream);
+		UploadRow row = new UploadRow();
+		assertEquals(stream, objectUnderTest.getDownloadStreamForFile(row, "username"));
+		verify(mockUploadDao, times(1)).getDownloadStreamForFile(eq(row), eq("username"));
 	}
 
 }

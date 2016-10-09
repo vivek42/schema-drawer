@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.crawler.schema.web.config.DBConnectionPool;
@@ -16,14 +17,20 @@ import com.crawler.schema.web.model.User;
 import com.crawler.schema.web.model.UserProfile;
 
 public class UserDaoImpl implements UserDao {
+	
+	private static Logger LOGGER = Logger.getLogger(UserDao.class);
 
     @Autowired
     public UserDaoImpl(Connection connection) {
     }
+    
+    protected Connection getConnectionForMethod() {
+    	return DBConnectionPool.getInstance().openConnection();
+    }
 
 	@Override
 	public void addUser(User user) {
-		try (Connection conn = DBConnectionPool.getInstance().openConnection())
+		try (Connection conn = getConnectionForMethod())
 		{
 			PreparedStatement ps = conn.prepareStatement("insert into user values(?, ?, ?, ?)");
 			ps.setLong(1, user.getUserId());
@@ -40,13 +47,13 @@ public class UserDaoImpl implements UserDao {
 			conn.commit();
 			ps.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOGGER.info(e);
 		}
 	}
 
 	@Override
 	public void editUser(User user) {
-		try (Connection conn = DBConnectionPool.getInstance().openConnection()){
+		try (Connection conn = getConnectionForMethod()){
 			PreparedStatement ps = conn.prepareStatement("update user set username=?, password=?, status=? where user_id=?");
 			ps.setString(1, user.getUsername());
 			ps.setString(2, user.getPassword());
@@ -65,13 +72,13 @@ public class UserDaoImpl implements UserDao {
 			conn.commit();
 			ps.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOGGER.info(e);
 		}
 	}
 
 	@Override
 	public void deleteUser(User user) {
-		try (Connection conn = DBConnectionPool.getInstance().openConnection())
+		try (Connection conn = getConnectionForMethod())
 		{
 			PreparedStatement ps = conn.prepareStatement("delete from userandroles where user_id = ?");
 			ps.setLong(1, user.getUserId());
@@ -82,7 +89,7 @@ public class UserDaoImpl implements UserDao {
 			conn.commit();
 			ps.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOGGER.info(e);
 		}
 	}
 
@@ -92,7 +99,7 @@ public class UserDaoImpl implements UserDao {
 		user.setUserId(userId);
 		List<Role> roles = new ArrayList<Role>();
 		user.setRoles(roles);
-		try (Connection conn = DBConnectionPool.getInstance().openConnection()){
+		try (Connection conn = getConnectionForMethod()){
 			PreparedStatement ps = conn.prepareStatement("select * from user where user_id=?");
 			ps.setInt(1, userId);
 			ResultSet rs = ps.executeQuery();
@@ -111,7 +118,7 @@ public class UserDaoImpl implements UserDao {
 			rs.close();
 			ps.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOGGER.info(e);
 		}
 		return user;
 	}
@@ -122,7 +129,7 @@ public class UserDaoImpl implements UserDao {
 		user.setUsername(username);
 		List<Role> roles = new ArrayList<Role>();
 		user.setRoles(roles);
-		try (Connection conn = DBConnectionPool.getInstance().openConnection()){
+		try (Connection conn = getConnectionForMethod()){
 			PreparedStatement ps = conn.prepareStatement("select * from user where username=?");
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
@@ -142,7 +149,7 @@ public class UserDaoImpl implements UserDao {
 			rs.close();
 			ps.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOGGER.info(e);
 		}
 		return user;
 	}
@@ -150,7 +157,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public List<User> getAllUsers() {
 		List<User> allUsers = new ArrayList<User>();
-		try (Connection conn = DBConnectionPool.getInstance().openConnection()){
+		try (Connection conn = getConnectionForMethod()){
 			PreparedStatement ps = conn.prepareStatement("select * from user");
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
@@ -165,14 +172,14 @@ public class UserDaoImpl implements UserDao {
 			rs.close();
 			ps.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOGGER.info(e);
 		}
 		return allUsers;
 	}
 
 	@Override
 	public void persistUserProfile(UserProfile userProfile) {
-		try (Connection conn = DBConnectionPool.getInstance().openConnection()){
+		try (Connection conn = getConnectionForMethod()){
 			PreparedStatement ps = conn.prepareStatement("insert into user_profile(user_id, firstname, lastname, email, dob, gender) values(?, ?, ?, ?, ?, ?)");
 			ps.setLong(1, userProfile.getId());
 			ps.setString(2, userProfile.getFirstName());
@@ -184,7 +191,7 @@ public class UserDaoImpl implements UserDao {
 			conn.commit();
 			ps.close();
 		}catch(Exception e) {
-			e.printStackTrace();
+			LOGGER.info(e);
 		}
 	}
 
@@ -192,7 +199,7 @@ public class UserDaoImpl implements UserDao {
 	public UserProfile getUserProfileByName(String username) {
 		UserProfile profile = new UserProfile();
 		profile.setUsername(username);
-		try (Connection conn = DBConnectionPool.getInstance().openConnection()){
+		try (Connection conn = getConnectionForMethod()){
 			PreparedStatement ps = conn.prepareStatement("select p.* from user_profile p join user u on u.user_id = p.user_id where u.username = ?");
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
@@ -208,14 +215,14 @@ public class UserDaoImpl implements UserDao {
 			rs.close();
 			ps.close();
 		}catch(Exception e){
-			e.printStackTrace();
+			LOGGER.info(e);
 		}
 		return profile;
 	}
 
 	@Override
 	public void updateUserProfile(UserProfile profile) {
-		try (Connection conn = DBConnectionPool.getInstance().openConnection()){
+		try (Connection conn = getConnectionForMethod()){
 			PreparedStatement ps = conn.prepareStatement("update user_profile set firstname=?, lastname=?, email=?, gender=? where user_id in (select user_id from user where username = ?)");
 			ps.setString(1, profile.getFirstName());
 			ps.setString(2, profile.getLastName());
@@ -226,7 +233,7 @@ public class UserDaoImpl implements UserDao {
 			conn.commit();
 			ps.close();
 		}catch(Exception e) {
-			e.printStackTrace();
+			LOGGER.info(e);
 		}
 	}
 }

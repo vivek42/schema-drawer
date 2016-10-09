@@ -67,5 +67,19 @@ public class TestUserServiceImpl extends Mockito{
 		assertEquals("a29bac723ca2d59ed78a2d715e17e92f",
 				objectUnderTest.encryptPassword("sai"));
 	}
+	
+	@Test
+	public void testGetUserProfileByName() {
+		UserProfile profile = new UserProfile();
+		when(mockDao.getUserProfileByName(eq("test"))).thenReturn(profile);
+		assertEquals(profile, objectUnderTest.getUserProfileByName("test"));
+	}
+	
+	@Test
+	public void testUpdateUserProfile() {
+		UserProfile profile = new UserProfile();
+		objectUnderTest.updateUserProfile(profile);
+		verify(mockDao, times(1)).updateUserProfile(eq(profile));
+	}
 
 }

@@ -42,15 +42,15 @@ public class UploadDao {
 	
     @Autowired
     public UploadDao(Connection connection) {
-        //this.connection = connection;
+    }
+    
+    protected Connection getConnectionForMethod() {
+    	return DBConnectionPool.getInstance().openConnection();
     }
 
 	public void upload(UploadRequest uploadRequest, byte[] uploadContent, String username, Long uploadUserXrefId) {
-		try (Connection conn = DBConnectionPool.getInstance().openConnection())
+		try (Connection conn = getConnectionForMethod())
 		{
-			//Connection conn = connection;
-			// Converting byte[] into input stream
-			//InputStream uploadStream = new ByteArrayInputStream(uploadContent);
 			PreparedStatement ps = conn.prepareStatement(INSERT_UPLOAD);
 			ps.setLong(1, uploadRequest.getUploadId());
 			ps.setBytes(2, uploadContent);
@@ -76,7 +76,7 @@ public class UploadDao {
 	public List<UploadRow> getUploadHistoryForUsername(String username) {
 		List<UploadRow> uploadHistory = new ArrayList<UploadRow>();
 		Long counter = 1L;
-		try (Connection conn = DBConnectionPool.getInstance().openConnection()){
+		try (Connection conn = getConnectionForMethod()){
 			PreparedStatement ps = conn.prepareStatement(SELECT_UPLOADS_BY_USER);
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
@@ -98,33 +98,22 @@ public class UploadDao {
 		return uploadHistory;
 	}
 
-	public InputStream getDownloadStreamForFile(UploadRow row, String username) {
-		InputStream stream = null;
-		try (Connection conn = DBConnectionPool.getInstance().openConnection())
-		{
-			PreparedStatement ps = conn.prepareStatement(SELECT_UPLOAD_CONTENT);
-			ps.setString(1, username);
-			ps.setString(2, row.getFileName());
-			ps.setTimestamp(3, row.getUploadTime());
-			ResultSet rs = ps.executeQuery();
-			if(rs.next()){
-				stream = rs.getBinaryStream("content");
-			}
-			rs.close();
-			ps.close();
-			return stream;
-		}catch (Exception e) {
-			LOGGER.info(e);
+	public InputStream getDownloadStreamForFile(UploadRow row, String username)  {
+		
+		byte[] downloadContent = getUploadContentByRow(row, username);
+		if (downloadContent == null) {
+			return new ByteArrayInputStream("".getBytes());
+		} else {
+			return new ByteArrayInputStream(downloadContent);
+
 		}
-		stream = new ByteArrayInputStream("".getBytes());
-		return stream;
 	}
 
-	public byte[] getUploadContentByRow(UploadRow row, String username) throws SQLException {
+	public byte[] getUploadContentByRow(UploadRow row, String username) {
 		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		try (Connection conn = DBConnectionPool.getInstance().openConnection())
+		try (Connection conn = getConnectionForMethod())
 		{
 			ps = conn.prepareStatement(SELECT_UPLOAD_CONTENT);
 			ps.setString(1, username);
