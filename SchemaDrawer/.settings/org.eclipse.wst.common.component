@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-	<wb-module deploy-name="SchemaDrawer">
+	<wb-module deploy-name="schema-1.0.0-BUILD-SNAPSHOT">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
 		<wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/integration"/>
+        <dependent-module archiveName="schemacrawler-14.09.03.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/SchemaCrawler - (Placeholder for Super-jar)/SchemaCrawler - (Placeholder for Super-jar)">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="schemacrawler-integrations-14.09.03.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/SchemaCrawler - 4 - Integrations/SchemaCrawler - 4 - Integrations">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="schemacrawler-commandline-14.09.03.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/SchemaCrawler - 3 - Commandline/SchemaCrawler - 3 - Commandline">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="schemacrawler-tools-14.09.03.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/SchemaCrawler - 2 - Tools/SchemaCrawler - 2 - Tools">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="schemacrawler-api-14.09.03.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/SchemaCrawler - 1 - API/SchemaCrawler - 1 - API">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
 		<property name="java-output-path" value="target/classes"/>
         <property name="context-root" value="schema"/>
 	</wb-module>
