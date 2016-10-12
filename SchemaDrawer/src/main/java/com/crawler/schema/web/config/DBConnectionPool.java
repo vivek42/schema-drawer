@@ -1,5 +1,6 @@
 package com.crawler.schema.web.config;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -32,9 +33,12 @@ public class DBConnectionPool {
     public Connection openConnection() {
     	Connection conn;
         try {
+        	ClassLoader classLoader = this.getClass().getClassLoader();
+        	String databaseFilePath = new File(classLoader.getResource("database/testdb").getFile()).getAbsolutePath();
         	DriverManagerDataSource dataSource = new DriverManagerDataSource();
     		dataSource.setDriverClassName("org.sqlite.JDBC");
-    		dataSource.setUrl("jdbc:sqlite:/home/vivek/schemaDrawerDB/db");
+    		//dataSource.setUrl("jdbc:sqlite:/home/vivek/schemaDrawerDB/db");
+    		dataSource.setUrl("jdbc:sqlite:" + databaseFilePath);
             conn = dataSource.getConnection();
             conn.setAutoCommit(false);
             return conn;
@@ -42,6 +46,7 @@ public class DBConnectionPool {
         catch (SQLException e) {
             flag = false;
         }
+        
         return null;
     }
  

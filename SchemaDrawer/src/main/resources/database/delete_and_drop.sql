@@ -1,0 +1,14 @@
+delete from user_upload_xref;
+delete from user_profile;
+delete from usersandroles;
+delete from role;
+delete from uploads;
+delete from user;
+delete from events;
+drop table user_upload_xref;
+drop table user_profile;
+drop table usersandroles;
+drop table role;
+drop table uploads;
+drop table user;
+drop table events;
