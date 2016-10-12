@@ -31,7 +31,7 @@
 				<form:form id="uploadRequestForm" action="/ui/guest" commandName="uploadRequest" method="post" enctype="multipart/form-data">
 					<div class="row">
 						<div class="col-sm-6"><form:input class="btn btn-info" type="file" value="select File" path="uploadContentFile"/></div>
-						<div class="col-sm-6" align="center"><input class="btn btn-default" type="submit" value="Generate Schema"/></div>
+						<div class="col-sm-6" align="center"><input id="generateSchema" class="btn btn-default" type="submit" value="Generate Schema"/></div>
 					</div>
 					<div class="row">
 						<form:errors path="uploadContentFile" cssClass="error" />

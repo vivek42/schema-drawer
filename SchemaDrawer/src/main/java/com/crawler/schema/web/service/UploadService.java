@@ -80,4 +80,13 @@ public class UploadService {
 		InputStream stream = new FileInputStream(outputFilePath.toFile());
 		return stream;
 	}
+	
+	public InputStream generateOutputFromFileForGuest(String username, File dbFile) {
+		try {
+			return generateOutputFromFile(username, dbFile);
+		} catch(Exception e) {
+			LOGGER.info(e);
+			return null;
+		}
+	}
 }

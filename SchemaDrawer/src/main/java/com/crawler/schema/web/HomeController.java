@@ -114,7 +114,7 @@ public class HomeController {
 		InputStream in = null ;
 		try {
 			uploadRequest.getUploadContentFile().transferTo(dbFile);
-			in = uploadService.generateOutputFromFile("", dbFile);
+			in = uploadService.generateOutputFromFileForGuest("", dbFile);
 			inputStreamToDownload(dbFile.getName(), in, response, "_output.html");
 		} catch (Exception e) {
 			LOGGER.info("Unable to generate diagram for file : <" + dbFile.getName() + ">");

@@ -9,29 +9,21 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class GuestFeatureTest {
 	
-	
 	@Test
-	public void testFirst() throws InterruptedException {
+	public void testGuestDownload() throws InterruptedException {
 		
-//		WebDriver driver = new ChromeDriver();
-//		  driver.get("http://localhost");
-//		  Thread.sleep(5000);  // Let the user actually see something!
-//		  WebElement searchBox = driver.findElement(By.name("q"));
-//		  searchBox.sendKeys("ChromeDriver");
-//		  searchBox.submit();
-//		  Thread.sleep(5000);  // Let the user actually see something!
-//		  driver.quit();
-		// Create a new instance of the Firefox driver
 		WebDriver driver = new FirefoxDriver();
 		
-        //Launch the Online Store Website
-		driver.get("http://localhost:30018/ui/login");
- 
+		driver.get("http://localhost:8080/ui/login");
+		driver.findElement(By.id("guestLink")).click();
+		driver.findElement(By.id("uploadContentFile")).sendKeys("/Users/vivekchouhan/Desktop/testUpload.txt");
+		Thread.sleep(5000);
+		driver.findElement(By.id("generateSchema")).click();
         // Print a Log In message to the screen
-        System.out.println("Successfully opened the website www.Store.Demoqa.com");
+        System.out.println("Successfully opened guest home");
  
 		//Wait for 5 Sec
-		Thread.sleep(5);
+		Thread.sleep(5000);
 		
         // Close the driver
         driver.quit();
