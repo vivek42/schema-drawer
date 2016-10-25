@@ -109,15 +109,15 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/guest", method = RequestMethod.POST)
-	public void guestDiagramDownload(@ModelAttribute UploadRequest uploadRequest, HttpServletRequest request, HttpServletResponse response,Principal principal) {
-		File dbFile = new File(uploadRequest.getUploadContentFile().getOriginalFilename());
-		InputStream in = null ;
+	public void guestDiagramDownload(@ModelAttribute UploadRequest uploadRequest, HttpServletRequest request, HttpServletResponse response,Principal principal) throws IOException {
 		try {
+			File dbFile = File.createTempFile(uploadRequest.getUploadContentFile().getOriginalFilename(), "");
+			InputStream in = null ;
 			uploadRequest.getUploadContentFile().transferTo(dbFile);
 			in = uploadService.generateOutputFromFileForGuest("", dbFile);
 			inputStreamToDownload(dbFile.getName(), in, response, "_output.html");
 		} catch (Exception e) {
-			LOGGER.info("Unable to generate diagram for file : <" + dbFile.getName() + ">");
+			LOGGER.info("Unable to generate diagram for file : <" + uploadRequest.getUploadContentFile().getOriginalFilename() + ">");
 		} 
 	}
 	
