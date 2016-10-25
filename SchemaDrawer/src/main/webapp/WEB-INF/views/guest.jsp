@@ -28,7 +28,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading"><h4>Upload Box (Only works for sqlite db file)</h4></div>
 				<div class="panel-body">
-				<form:form id="uploadRequestForm" action="/ui/guest" commandName="uploadRequest" method="post" enctype="multipart/form-data">
+				<form:form id="uploadRequestForm" action="/ui/guest" commandName="uploadRequest" method="post" enctype="multipart/form-data" target="_blank">
 					<div class="row">
 						<div class="col-sm-6"><form:input class="btn btn-info" type="file" value="select File" path="uploadContentFile"/></div>
 						<div class="col-sm-6" align="center"><input id="generateSchema" class="btn btn-default" type="submit" value="Generate Schema"/></div>

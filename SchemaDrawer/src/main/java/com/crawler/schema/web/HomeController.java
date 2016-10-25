@@ -123,8 +123,8 @@ public class HomeController {
 	
 	protected void inputStreamToDownload(String filename, InputStream in, HttpServletResponse response, String fileExtension) throws IOException {
 		try {
-			response.setContentType("application/octet-stream");
-			response.setHeader("Content-Disposition","attachment;filename=" + filename + fileExtension);
+			response.setContentType("text/html");
+			response.setHeader("Content-Disposition","filename=" + filename + fileExtension);
 			//response.setContentType("image/jpeg");
 			IOUtils.copy(in, response.getOutputStream());
 		} catch (Exception e) {
