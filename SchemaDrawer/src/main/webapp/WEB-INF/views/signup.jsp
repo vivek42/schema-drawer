@@ -31,7 +31,7 @@
 					<h2 align="center" class="modal-title">Please fill the
 						following information</h2>
 				</div>
-				<form:form id="profileCreation" action="/ui/profile/create"
+				<form:form id="profileCreation" action="/profile/create"
 					commandName="profile" method="POST">
 					<div class="modal-body">
 						<table class="table table-hover">
@@ -88,7 +88,7 @@
 					<div class="modal-footer">
 						<div class="row">
 							<div class="col-sm-6" align="left">
-							  	<a href="/ui/login" class="btn btn-default" role="button">Back to login</a>
+							  	<a href="/login" class="btn btn-default" role="button">Back to login</a>
 							</div>
 							<div class="col-sm-6" align="right">
 								<input class="btn btn-default" type="submit" value="Submit" />

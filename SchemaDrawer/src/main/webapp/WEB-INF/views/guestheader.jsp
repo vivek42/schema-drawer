@@ -31,7 +31,7 @@
 		</div>
 		<div class="col-sm-3" align="center">
 			<div class="btn btn-default">
-				<a href="/ui/login">Go to login page</a>
+				<a href="/login">Go to login page</a>
 			</div>
 		</div>
 	</div>

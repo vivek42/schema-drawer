@@ -47,9 +47,8 @@
       <div class="modal-footer">
 		<input class="btn btn-default"type="submit" value="login" />
        	<table>
-	   		<tr><td align="left">First time users-</td><td><a href="/ui/profile/create">Register here!</a></td></tr>
-	   		<br/>
-	   		<tr><td align="right"><a id="guestLink" href="/ui/guest">As a guest?</a></td></tr>
+	   		<tr><td align="left">First time users-</td><td><a href="/profile/create">Register here!</a></td></tr>
+	   		<tr><td align="right"><a id="guestLink" href="/guest">As a guest?</a></td></tr>
 	 	</table>
       </div>
 	</form>
