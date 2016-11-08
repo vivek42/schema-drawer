@@ -10,4 +10,9 @@ public class LoginController {
 	public String doLogin() {
 		return "login";
 	}
+	
+	@RequestMapping("/")
+	public String redirectToLogin() {
+		return doLogin();
+	}
 }
