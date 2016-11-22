@@ -11,8 +11,8 @@ public class LoginController {
 		return "login";
 	}
 	
-	@RequestMapping("/")
-	public String redirectToLogin() {
-		return doLogin();
-	}
+//	@RequestMapping("/")
+//	public String redirectToLogin() {
+//		return doLogin();
+//	}
 }

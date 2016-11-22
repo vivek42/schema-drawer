@@ -26,13 +26,13 @@
 		</div>
 		<div class="col-sm-8" align="left">
 			<h4>
-				Hi, Guest
+				Welcome, Guest
 			</h4>
 		</div>
 		<div class="col-sm-3" align="center">
-			<div class="btn btn-default">
-				<a href="/login">Go to login page</a>
-			</div>
+<!-- 			<div class="btn btn-default"> -->
+<!-- 				<a href="/login">Go to login page</a> -->
+<!-- 			</div> -->
 		</div>
 	</div>
 </body>

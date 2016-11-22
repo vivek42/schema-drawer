@@ -24,7 +24,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.crawler.schema.web.config.GraphOutputFormat;
+import com.crawler.schema.web.config.TextOutputFormat;
+import com.crawler.schema.web.model.CommandEnum;
 import com.crawler.schema.web.model.Event;
+import com.crawler.schema.web.model.OutputEnum;
 import com.crawler.schema.web.model.UploadRequest;
 import com.crawler.schema.web.model.UploadRow;
 import com.crawler.schema.web.service.EventService;
@@ -57,7 +61,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/admin/upload", method = RequestMethod.GET)
-	public ModelAndView home(Model model, Principal principal) {
+	public ModelAndView userHome(Model model, Principal principal) {
 		model.addAttribute("uploadRequest", new UploadRequest());
 		model.addAttribute("uploadHistory", uploadService.getUploadHistoryForUsername(principal.getName()));
 		model.addAttribute("uploadRow", new UploadRow());
@@ -96,6 +100,11 @@ public class HomeController {
 		InputStream in = uploadService.getDownloadStreamForDiagram(uploadRow, principal.getName());
 		inputStreamToDownload(uploadRow.getFileName(), in, response, "_output.html");
 	}
+	
+	@RequestMapping(value="/", method = RequestMethod.GET)
+	public ModelAndView home(Model model, Principal principal) {
+		return guestHome(model, principal);
+	}
 
 	
 	@RequestMapping(value="/guest", method = RequestMethod.GET)
@@ -104,6 +113,10 @@ public class HomeController {
 			return new ModelAndView("redirect:/admin/upload");
 		} else {
 			model.addAttribute("uploadRequest", new UploadRequest());
+			model.addAttribute("commandList", CommandEnum.getAllCommandEnum());
+			model.addAttribute("outputList", OutputEnum.getAllOutputEnum());
+			model.addAttribute("textOutputList", TextOutputFormat.getActiveTextOutputFormatList());
+			model.addAttribute("graphOutputList", GraphOutputFormat.getActiveGraphOutputFormatList());
 			return new ModelAndView("guest");
 		}
 	}

@@ -11,6 +11,8 @@ public class UploadRequest {
 	MultipartFile uploadContentFile;
 	Date uploadTime;
 	String fileName;
+	String format;
+	String output;
 	public Long getUploadId() {
 		return uploadId;
 	}
@@ -38,6 +40,18 @@ public class UploadRequest {
 	
 	public String getUploadContent() throws IOException{
 		return new String(getUploadContentFile().getBytes());
+	}
+	public String getFormat() {
+		return format;
+	}
+	public void setFormat(String format) {
+		this.format = format;
+	}
+	public String getOutput() {
+		return output;
+	}
+	public void setOutput(String output) {
+		this.output = output;
 	}
 	
 }
