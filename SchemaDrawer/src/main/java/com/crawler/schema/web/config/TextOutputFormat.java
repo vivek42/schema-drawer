@@ -5,8 +5,8 @@ import java.util.List;
 
 public enum TextOutputFormat {
 
-	 text("Plain text format", true),
-	 html("HyperText Markup Language (HTML) format", true),
+	 text("Plain text format", false),
+	 html("HyperText Markup Language (HTML) format", false),
 	 csv("Comma-separated values (CSV) format",false),
 	 tsv("Tab-separated values (TSV) format", false),
 	 json("JavaScript Object Notation (JSON) format",false),;
@@ -58,6 +58,16 @@ public enum TextOutputFormat {
 	  }
 	  
 	  public static List<String> getActiveTextOutputFormatList() {
+		  List<String> outputList = new ArrayList<>();
+		  for (TextOutputFormat format : TextOutputFormat.values()) {
+			  if(format.isActive) {
+				  outputList.add(format.description);
+			  }
+		  }
+		  return outputList;
+	  }
+	  
+	  public static List<String> getTextOutputFormatList() {
 		  List<String> outputList = new ArrayList<>();
 		  for (TextOutputFormat format : TextOutputFormat.values()) {
 			  if(format.isActive) {

@@ -5,12 +5,13 @@ import java.util.List;
 
 public enum CommandEnum {
 	
-	Text(1, "text"),
-	Graph(2, "graph");
+	Text(1, "text", false),
+	Graph(2, "graph", true);
 
 	int serialNo;
 	String command;
-	CommandEnum(int serialNo, String command) {
+	boolean active;
+	CommandEnum(int serialNo, String command, boolean active) {
 		this.serialNo = serialNo;
 		this.command = command;
 	}
@@ -19,6 +20,9 @@ public enum CommandEnum {
 	}
 	public String getCommand() {
 		return command;
+	}
+	public boolean isActive() {
+		return active;
 	}
 	public static CommandEnum getCommandEnumByString(String command) {
 		for (CommandEnum com : values()) {
@@ -29,10 +33,10 @@ public enum CommandEnum {
 		return null;
 	}
 	
-	public static List<String> getAllCommandEnum() {
-		List<String> commandList = new ArrayList<>();
+	public static List<CommandEnum> getAllCommandEnum() {
+		List<CommandEnum> commandList = new ArrayList<>();
 		for (CommandEnum com : values()) {
-			commandList.add(com.getCommand());
+			commandList.add(com);
 		}
 		return commandList;
 	}

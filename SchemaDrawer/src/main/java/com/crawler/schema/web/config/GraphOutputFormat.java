@@ -8,7 +8,7 @@ public enum GraphOutputFormat {
 	 htmlx("htmlx", "SchemaCrawler graph embedded in HTML5", false),
 	 scdot("scdot", "SchemaCrawler generated format", false),
 	 //
-	 bmp("bmp", "Windows Bitmap Format", true),
+	 bmp("bmp", "Windows Bitmap Format", false),
 	 canon("canon", "DOT", false),
 	 dot("dot", "DOT", false),
 	 gv("gv", "DOT", false),
