@@ -4,8 +4,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 
-import com.crawler.schema.web.config.GraphOutputFormat;
-
 import schemacrawler.schemacrawler.ExcludeAll;
 import schemacrawler.schemacrawler.IncludeAll;
 import schemacrawler.schemacrawler.SchemaCrawlerOptions;
@@ -13,7 +11,6 @@ import schemacrawler.schemacrawler.SchemaInfoLevelBuilder;
 import schemacrawler.tools.executable.Executable;
 import schemacrawler.tools.executable.SchemaCrawlerExecutable;
 import schemacrawler.tools.options.OutputOptions;
-import schemacrawler.tools.options.TextOutputFormat;
 
 public class SchemaCrawlerUtility {
 
@@ -41,9 +38,9 @@ public class SchemaCrawlerUtility {
 	    //                                                      outputFile);
 	    //final String command = "schema";
 	    
-	    final OutputOptions outputOptions = new OutputOptions();
+	    final OutputOptions outputOptions = new OutputOptions(schemacrawler.tools.integration.graph.GraphOutputFormat.jpeg, outputFile);
 	    
-	    final String command = "schema";
+	    final String command = "graph";
 
 	    final Executable executable = new SchemaCrawlerExecutable(command);
 	    executable.setSchemaCrawlerOptions(options);
